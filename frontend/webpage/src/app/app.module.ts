@@ -51,11 +51,13 @@ import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginSignupComponent
+    LoginSignupComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
