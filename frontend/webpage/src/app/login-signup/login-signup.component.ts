@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../_services/AuthService/auth-service.service';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-login-signup',
@@ -18,6 +25,9 @@ export class LoginSignupComponent implements OnInit {
   });
 
   submitsignin(): void {
-    this.authservice.login(this.credentials.value['username'], this.credentials.value['password']);
+    this.authservice.login(
+      this.credentials.value['username'],
+      this.credentials.value['password']
+    );
   }
 }

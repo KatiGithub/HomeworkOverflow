@@ -1,6 +1,7 @@
 .main-card {
   max-width: fit-content;
   height: fit-content;
+  animation: mainCardIn 2s;
 }
 
 
@@ -12,4 +13,16 @@
 .example-header-image {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
+}
+
+@keyframes mainCardIn{
+  from {
+    vertical-align: top;
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
 }
