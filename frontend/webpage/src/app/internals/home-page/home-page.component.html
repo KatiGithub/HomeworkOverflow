@@ -1,10 +1,15 @@
 <mat-grid-list cols="5" rowHeight="100%">
     <mat-grid-tile colspan="4" [ngStyle]="{'background-color': 'skyblue'}">
-        <cdk-virtual-scroll-viewport itemSize="100">
-            <div *cdkVirtualFor="let question of questions">
-                {{ question.question }}
+        <div class="question-list">
+            <div *ngFor="let question of this.questions;" >
+                <div class="question">
+                    <h1>{{ question['asker_username'] }}</h1>
+                    {{ question['question'] }}
+                    <p style="text-align: right;">Votes: {{ question['upvotes'] }}</p>
+                </div>
+                <hr>
             </div>
-        </cdk-virtual-scroll-viewport>
-    </mat-grid-tile>
+        </div>
+        </mat-grid-tile>
     <mat-grid-tile [ngStyle]="{'background-color': 'red'}">2</mat-grid-tile>
 </mat-grid-list>
