@@ -1,1 +1,10 @@
-<p>home-page works!</p>
+<mat-grid-list cols="5" rowHeight="100%">
+    <mat-grid-tile colspan="4" [ngStyle]="{'background-color': 'skyblue'}">
+        <cdk-virtual-scroll-viewport itemSize="100">
+            <div *cdkVirtualFor="let question of questions">
+                {{ question.question }}
+            </div>
+        </cdk-virtual-scroll-viewport>
+    </mat-grid-tile>
+    <mat-grid-tile [ngStyle]="{'background-color': 'red'}">2</mat-grid-tile>
+</mat-grid-list>

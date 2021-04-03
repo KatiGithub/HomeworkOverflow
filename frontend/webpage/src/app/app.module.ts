@@ -50,6 +50,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { ScrollingModule } from '@angular/cdk/scrolling';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePageComponent } from './internals/home-page/home-page.component';
 import { HeaderComponent } from './header/header.component';
@@ -103,7 +105,8 @@ import { HeaderComponent } from './header/header.component';
     MatTableModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ScrollingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
