@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { Question } from 'src/app/_shared/QuestionsModel';
 import { QuestionhandlerService } from '../../_services/QuestionHandler/questionhandler.service';
 

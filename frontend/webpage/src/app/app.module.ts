@@ -55,13 +55,17 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePageComponent } from './internals/home-page/home-page.component';
 import { HeaderComponent } from './header/header.component';
+import { QuestioncontainerComponent } from './questioncontainer/questioncontainer.component';
+import { ProfilePageComponentComponent } from './internals/profile-page-component/profile-page-component.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginSignupComponent,
     HomePageComponent,
-    HeaderComponent
+    HeaderComponent,
+    QuestioncontainerComponent,
+    ProfilePageComponentComponent,
   ],
   imports: [
     BrowserModule,

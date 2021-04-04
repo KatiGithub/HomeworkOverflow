@@ -1,0 +1,11 @@
+<div style="display: flex; justify-content: space-between">
+  <p>
+    {{ question.question }}
+  </p>
+
+  <a id="asker_username" [routerLink]="['/profile', question.asker_username]">
+    {{ question.asker_username }}
+  </a>
+</div>
+
+<hr />
