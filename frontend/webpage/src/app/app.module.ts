@@ -57,6 +57,7 @@ import { HomePageComponent } from './internals/home-page/home-page.component';
 import { HeaderComponent } from './header/header.component';
 import { QuestioncontainerComponent } from './questioncontainer/questioncontainer.component';
 import { ProfilePageComponentComponent } from './internals/profile-page-component/profile-page-component.component';
+import { AnswerPageComponent } from './internals/answer-page/answer-page.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { ProfilePageComponentComponent } from './internals/profile-page-componen
     HeaderComponent,
     QuestioncontainerComponent,
     ProfilePageComponentComponent,
+    AnswerPageComponent,
   ],
   imports: [
     BrowserModule,

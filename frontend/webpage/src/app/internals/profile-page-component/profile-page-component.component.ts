@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { ProfileService } from 'src/app/_services/ProfileService/profile.service';
+import { User } from '../../_shared/UserModel';
 
 @Component({
   selector: 'app-profile-page-component',
@@ -8,7 +10,9 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class ProfilePageComponentComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private ProfileService: ProfileService) { }
+
+  userondisplay: User = new User();
 
   asker_username: String;
 
@@ -18,6 +22,7 @@ export class ProfilePageComponentComponent implements OnInit {
     });
 
     console.log(this.asker_username);
+    this.userondisplay = this.ProfileService.retrieveprofile(this.asker_username);
   }
-
+  
 }
