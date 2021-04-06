@@ -1,13 +1,15 @@
 export class Question {
+    question_id: Number;
     question: String;
     answer: String;
     asker_username: String;
     upvotes: Number;
     comments: Number;
 
-    constructor(question: String, asker_username: String, upvotes: Number, comments: Number) { 
-        this.question = question,
-        this.upvotes = upvotes,
+    constructor(question_id: Number, question: String, asker_username: String, upvotes: Number, comments: Number) { 
+        this.question_id = question_id;
+        this.question = question;
+        this.upvotes = upvotes;
         this.asker_username = asker_username;
         this.comments = comments;
     }

@@ -1,1 +1,22 @@
-<p>answer-page works!</p>
+<div class="container">
+  <mat-card fxLayout="column">
+    <div class="question-header" fxLayout="column" fxLayoutALign="center center">
+        <h1>
+            {{ question.question }}
+        </h1>
+        <hr>
+    </div>
+  </mat-card>
+
+  <mat-card id="answer-card">
+    <div *ngFor="let answer of answers">
+        {{ answer.answer }}
+        <hr>
+    </div>
+
+    <h1>
+        Your answer:
+    </h1>
+    <quill-editor style="background-color: white"></quill-editor>
+  </mat-card>
+</div>

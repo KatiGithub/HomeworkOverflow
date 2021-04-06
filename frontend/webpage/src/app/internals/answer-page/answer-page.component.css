@@ -1,0 +1,21 @@
+mat-card {
+    height: 100%;
+    filter: drop-shadow(-3px 5px 5px);
+}
+
+#answer-card {
+    margin-top: 20px;
+}
+
+hr {
+    margin-left: 0px;
+    margin-right: 0px;
+    border: none;
+    background-color: black;
+    height: 1px;
+}
+
+.question-header {
+    width: 100%;
+    
+}

@@ -1,11 +1,10 @@
 <div style="display: flex; justify-content: space-between">
-  <p>
+  <a [routerLink]="['/question/', question.question_id]" style="color: black">
     {{ question.question }}
-  </p>
+  </a>
 
   <a id="asker_username" [routerLink]="['/profile', question.asker_username]">
     {{ question.asker_username }}
   </a>
 </div>
-
 <hr />

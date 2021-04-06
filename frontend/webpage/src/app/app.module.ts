@@ -58,6 +58,7 @@ import { HeaderComponent } from './header/header.component';
 import { QuestioncontainerComponent } from './questioncontainer/questioncontainer.component';
 import { ProfilePageComponentComponent } from './internals/profile-page-component/profile-page-component.component';
 import { AnswerPageComponent } from './internals/answer-page/answer-page.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import { AnswerPageComponent } from './internals/answer-page/answer-page.compone
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    ScrollingModule
+    ScrollingModule,
+    QuillModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
