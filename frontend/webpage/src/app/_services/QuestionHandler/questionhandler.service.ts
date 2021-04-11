@@ -37,8 +37,8 @@ export class QuestionhandlerService {
   RetrieveAnswersofQuestion(question_id: Number): Array<Answer> {
     let ArrayofAnswers: Array<Answer> = [];
 
-    ArrayofAnswers.push(new Answer(this.asker_username_testlist[2], 'The answer is 1', new Date(), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 60)));
-    ArrayofAnswers.push(new Answer(this.asker_username_testlist[3], 'The answer is 1', new Date(), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 60)));
+    ArrayofAnswers.push(new Answer(this.asker_username_testlist[2], '<p>The answer is 1</p>', new Date(), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 60)));
+    ArrayofAnswers.push(new Answer(this.asker_username_testlist[3], '<p>The answer is 1</p>', new Date(), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 60)));
 
     return ArrayofAnswers;
   }

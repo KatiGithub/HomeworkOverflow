@@ -10,13 +10,14 @@
 
   <mat-card id="answer-card">
     <div *ngFor="let answer of answers">
-        {{ answer.answer }}
+        <quill-view [content]="answer.answer"></quill-view>
         <hr>
     </div>
 
     <h1>
         Your answer:
     </h1>
-    <quill-editor style="background-color: white"></quill-editor>
+    <quill-editor [formControl]="answer" style="background-color: white"></quill-editor>
+    <button mat-button color="primary" style="margin-top: 5px;" (click)="submitanswer()">Submit</button>
   </mat-card>
 </div>
