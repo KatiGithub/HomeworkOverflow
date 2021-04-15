@@ -1,21 +1,44 @@
 <div class="container">
   <mat-card fxLayout="column">
     <div class="question-header" fxLayout="column" fxLayoutALign="center center">
-        <h1>
-            {{ question.question }}
-        </h1>
-        <hr>
+      <h1>
+        {{ question.question }}
+      </h1>
+      <hr>
     </div>
   </mat-card>
 
   <mat-card id="answer-card">
     <div *ngFor="let answer of answers">
-        <quill-view [content]="answer.answer"></quill-view>
-        <hr>
+      <div>
+        <mat-grid-list cols="5">
+          <mat-grid-tile colspan="1">
+            <div class="upvote-downvote">
+              <button mat-button [ngStyle]="{'background-color': answer.upvote ? '#43cffa' : 'white'}"
+                (click)="upvotebuttonpressed(answer)"><img src="assets/chevron-compact-up.svg" height="20px"
+                  width="20px"></button>
+              <button mat-button [ngStyle]="{'background-color': answer.downvote ? '#eb3d54' : 'white'}"
+                (click)="downvotebuttonpressed(answer)"><img src="assets/chevron-compact-down.svg" height="20px"
+                  width="20px"></button>
+              <h3>{{ answer.upvotes }}</h3>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="3">
+            <quill-view [content]="answer.answer"></quill-view>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1">
+            <a [routerLink]="['/profile', answer.answer_username]">
+              {{ answer.answer_username }}
+            </a>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+      <hr>
     </div>
 
     <h1>
-        Your answer:
+      Your answer:
     </h1>
     <quill-editor [formControl]="answer" style="background-color: white"></quill-editor>
     <button mat-button color="primary" style="margin-top: 5px;" (click)="submitanswer()">Submit</button>

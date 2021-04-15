@@ -37,8 +37,8 @@ export class QuestionhandlerService {
   RetrieveAnswersofQuestion(question_id: Number): Array<Answer> {
     let ArrayofAnswers: Array<Answer> = [];
 
-    ArrayofAnswers.push(new Answer(this.asker_username_testlist[2], '<p>The answer is 1</p>', new Date(), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 60)));
-    ArrayofAnswers.push(new Answer(this.asker_username_testlist[3], '<p>The answer is 1</p>', new Date(), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 60)));
+    ArrayofAnswers.push(new Answer(Math.floor(Math.random() * 1000), true, false, this.asker_username_testlist[2], '<p>The answer is 1</p>', new Date(), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 60)));
+    ArrayofAnswers.push(new Answer(Math.floor(Math.random() * 1000), false, true, this.asker_username_testlist[3], '<p>The answer is 1</p>', new Date(), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 60)));
 
     return ArrayofAnswers;
   }
@@ -46,5 +46,13 @@ export class QuestionhandlerService {
   RetrieveQuestionbyID(question_id: Number): Question {
 
     return new Question(question_id, this.testquestion, this.asker_username_testlist[3], Math.floor(Math.random() * 1000), Math.floor(Math.random() * 60));
+  }
+
+  upvoteanswer(answer_id: Number): void {
+    console.log('Upvoted answer id: ' + answer_id);
+  }
+
+  downvoteanswer(answer_id: Number): void {
+    console.log('Downvoted answer id: ' + answer_id);
   }
 }

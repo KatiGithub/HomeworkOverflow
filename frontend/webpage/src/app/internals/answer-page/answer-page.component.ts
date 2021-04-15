@@ -8,15 +8,19 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-answer-page',
   templateUrl: './answer-page.component.html',
-  styleUrls: ['./answer-page.component.css']
+  styleUrls: ['./answer-page.component.css'],
 })
 export class AnswerPageComponent implements OnInit {
-
-  constructor(private route: ActivatedRoute, private questionhandler: QuestionhandlerService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private questionhandler: QuestionhandlerService
+  ) {}
 
   question_id: Number;
-  answers: Array<Answer>
+  answers: Array<Answer>;
   question: Question;
+  upvotepressed: Boolean = false;
+  downvotepressed: Boolean = false;
 
   answer = new FormControl('');
 
@@ -27,14 +31,42 @@ export class AnswerPageComponent implements OnInit {
 
     console.log(this.question_id);
     this.question = this.questionhandler.RetrieveQuestionbyID(this.question_id);
-    this.answers = this.questionhandler.RetrieveAnswersofQuestion(this.question_id);
+    this.answers = this.questionhandler.RetrieveAnswersofQuestion(
+      this.question_id
+    );
   }
 
   submitanswer(): void {
     console.log(this.answer.value);
-    this.answers.push(new Answer('Mark', this.answer.value, new Date(), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 60)));
+    this.answers.push(
+      new Answer(
+        Math.floor(Math.random() * 1000),
+        false,
+        false,
+        'Mark',
+        this.answer.value,
+        new Date(),
+        Math.floor(Math.random() * 1000),
+        Math.floor(Math.random() * 60)
+      )
+    );
     this.answer.disable();
     this.answer.reset();
   }
 
+  upvotebuttonpressed(answer): void {
+    console.log(answer.answer_id);
+    this.answers[this.answers.indexOf(answer)].upvote = true;
+    this.answers[this.answers.indexOf(answer)].downvote = false;
+
+    this.questionhandler.upvoteanswer(answer.answer_id);
+  }
+
+  downvotebuttonpressed(answer): void {
+    console.log(answer.answer_id);
+    this.answers[this.answers.indexOf(answer)].upvote = false;
+    this.answers[this.answers.indexOf(answer)].downvote = true;
+
+    this.questionhandler.downvoteanswer(answer.answer_id);
+  }
 }

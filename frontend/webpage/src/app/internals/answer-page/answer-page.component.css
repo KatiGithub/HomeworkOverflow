@@ -19,3 +19,16 @@ hr {
     width: 100%;
     
 }
+
+
+.upvote-downvote {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upvote-downvote h3,
+.upvote-downvote mat-button {
+    margin-left: 5px;
+}
