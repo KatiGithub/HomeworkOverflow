@@ -26,4 +26,13 @@ export class AuthService {
     }
 
   }
+
+  isActivated(): boolean {
+    console.log(localStorage.getItem('current_user'));
+    if(localStorage.getItem('current_user') != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

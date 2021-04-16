@@ -59,6 +59,7 @@ import { QuestioncontainerComponent } from './questioncontainer/questioncontaine
 import { ProfilePageComponentComponent } from './internals/profile-page-component/profile-page-component.component';
 import { AnswerPageComponent } from './internals/answer-page/answer-page.component';
 import { QuillModule } from 'ngx-quill';
+import { AuthGuardService } from './_services/AuthGuardService/AuthGuardService';
 
 @NgModule({
   declarations: [
@@ -116,7 +117,9 @@ import { QuillModule } from 'ngx-quill';
     ScrollingModule,
     QuillModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    AuthGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -17,7 +17,7 @@ export class AppComponent {
   ngOnInit() {
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
-      if(this.router.url != '/' && this.router.url != '/signup') {
+      if(this.router.url != '/login' && this.router.url != '/signup') {
         this.visibility = true;
       } else {
         this.visibility = false;

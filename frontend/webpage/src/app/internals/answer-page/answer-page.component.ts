@@ -56,17 +56,46 @@ export class AnswerPageComponent implements OnInit {
 
   upvotebuttonpressed(answer): void {
     console.log(answer.answer_id);
-    this.answers[this.answers.indexOf(answer)].upvote = true;
-    this.answers[this.answers.indexOf(answer)].downvote = false;
+    if(this.answers[this.answers.indexOf(answer)].upvote == false && this.answers[this.answers.indexOf(answer)].downvote == true) {
+      this.answers[this.answers.indexOf(answer)].upvote = true;
+      this.answers[this.answers.indexOf(answer)].downvote = false;
+      this.answers[this.answers.indexOf(answer)].upvotes = this.answers[this.answers.indexOf(answer)].upvotes + 2
 
-    this.questionhandler.upvoteanswer(answer.answer_id);
+      this.questionhandler.upvoteanswer(answer.answer_id);
+    } else if(this.answers[this.answers.indexOf(answer)].upvote == true && this.answers[this.answers.indexOf(answer)].downvote == false) {
+      this.answers[this.answers.indexOf(answer)].upvote = false;
+      this.answers[this.answers.indexOf(answer)].downvote = false;
+      this.answers[this.answers.indexOf(answer)].upvotes = this.answers[this.answers.indexOf(answer)].upvotes - 1
+
+      this.questionhandler.upvoteanswer(answer.answer_id);
+    } else if(this.answers[this.answers.indexOf(answer)].upvote == false && this.answers[this.answers.indexOf(answer)].downvote == false) {
+      this.answers[this.answers.indexOf(answer)].upvote = true;
+      this.answers[this.answers.indexOf(answer)].downvote = false;
+      this.answers[this.answers.indexOf(answer)].upvotes = this.answers[this.answers.indexOf(answer)].upvotes + 1
+
+      this.questionhandler.upvoteanswer(answer.answer_id);
+    }
   }
 
   downvotebuttonpressed(answer): void {
     console.log(answer.answer_id);
-    this.answers[this.answers.indexOf(answer)].upvote = false;
-    this.answers[this.answers.indexOf(answer)].downvote = true;
+    if(this.answers[this.answers.indexOf(answer)].downvote == false && this.answers[this.answers.indexOf(answer)].upvote == true) {
+      this.answers[this.answers.indexOf(answer)].upvote = false;
+      this.answers[this.answers.indexOf(answer)].downvote = true;
+      this.answers[this.answers.indexOf(answer)].upvotes = this.answers[this.answers.indexOf(answer)].upvotes - 2
 
-    this.questionhandler.downvoteanswer(answer.answer_id);
+      this.questionhandler.downvoteanswer(answer.answer_id);
+    } else if(this.answers[this.answers.indexOf(answer)].downvote == true && this.answers[this.answers.indexOf(answer)].upvote == false) {
+      this.answers[this.answers.indexOf(answer)].downvote = false;
+      this.answers[this.answers.indexOf(answer)].upvote = false;
+      this.answers[this.answers.indexOf(answer)].upvotes = this.answers[this.answers.indexOf(answer)].upvotes + 1
+
+      this.questionhandler.downvoteanswer(answer.answer_id);
+    } else if(this.answers[this.answers.indexOf(answer)].downvote == false && this.answers[this.answers.indexOf(answer)].upvote == false) {
+      this.answers[this.answers.indexOf(answer)].downvote = true;
+      this.answers[this.answers.indexOf(answer)].upvotes = this.answers[this.answers.indexOf(answer)].upvotes - 1;
+
+      this.questionhandler.upvoteanswer(answer.answer_id);
+    }
   }
 }
