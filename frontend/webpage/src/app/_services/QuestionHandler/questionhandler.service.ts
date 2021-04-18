@@ -7,8 +7,6 @@ import { Question } from '../../_shared/QuestionsModel';
 })
 export class QuestionhandlerService {
 
-  
-  
   asker_username_testlist = ['Mark', 'John', 'Mary', 'Thomas', 'Judas', 'Leviticus', 'Adam', 'Eve', 'Zuccheus', 'Samael'];
   testquestion = 'What is 0 to the power of 0?'
 

@@ -60,6 +60,7 @@ import { ProfilePageComponentComponent } from './internals/profile-page-componen
 import { AnswerPageComponent } from './internals/answer-page/answer-page.component';
 import { QuillModule } from 'ngx-quill';
 import { AuthGuardService } from './_services/AuthGuardService/AuthGuardService';
+import { SearchpageComponent } from './internals/searchpage/searchpage.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { AuthGuardService } from './_services/AuthGuardService/AuthGuardService'
     QuestioncontainerComponent,
     ProfilePageComponentComponent,
     AnswerPageComponent,
+    SearchpageComponent,
   ],
   imports: [
     BrowserModule,

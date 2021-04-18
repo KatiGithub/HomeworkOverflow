@@ -5,6 +5,7 @@ import { HomePageComponent } from './internals/home-page/home-page.component';
 import { ProfilePageComponentComponent } from './internals/profile-page-component/profile-page-component.component';
 import { AnswerPageComponent } from './internals/answer-page/answer-page.component';
 import { AuthGuardService } from './_services/AuthGuardService/AuthGuardService';
+import { SearchpageComponent } from './internals/searchpage/searchpage.component';
 
 const routes: Routes = [
   {
@@ -27,15 +28,22 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
+    path: 'search',
+    component: SearchpageComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
     path: '',
     redirectTo: '/login',
     pathMatch: 'full'
   },
+  
   {
     path: '**',
     redirectTo: '/login',
     pathMatch: 'full'
-  }
+  },
+  
 ];
 
 @NgModule({

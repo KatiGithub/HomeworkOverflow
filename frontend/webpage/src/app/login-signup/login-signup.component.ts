@@ -8,6 +8,7 @@ import {
   animate,
   transition,
 } from '@angular/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-signup',
@@ -15,9 +16,13 @@ import {
   styleUrls: ['./login-signup.component.css'],
 })
 export class LoginSignupComponent implements OnInit {
-  constructor(private authservice: AuthService) {}
+  constructor(private authservice: AuthService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(this.authservice.isActivated()) {
+      this.router.navigate(['/home'])
+    }
+  }
 
   credentials = new FormGroup({
     username: new FormControl(''),
