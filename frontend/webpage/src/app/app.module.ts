@@ -61,6 +61,7 @@ import { AnswerPageComponent } from './internals/answer-page/answer-page.compone
 import { QuillModule } from 'ngx-quill';
 import { AuthGuardService } from './_services/AuthGuardService/AuthGuardService';
 import { SearchpageComponent } from './internals/searchpage/searchpage.component';
+import { ProfilecontainerComponent } from './profilecontainer/profilecontainer.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { SearchpageComponent } from './internals/searchpage/searchpage.component
     ProfilePageComponentComponent,
     AnswerPageComponent,
     SearchpageComponent,
+    ProfilecontainerComponent,
   ],
   imports: [
     BrowserModule,

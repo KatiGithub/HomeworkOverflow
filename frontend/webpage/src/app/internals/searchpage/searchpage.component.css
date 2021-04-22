@@ -14,3 +14,16 @@
     width: 100%;
     border: coral;
 }
+
+.search-information {
+    margin-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-question-selector {
+    margin-right: 10px;
+}

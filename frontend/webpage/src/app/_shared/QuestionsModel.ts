@@ -5,13 +5,15 @@ export class Question {
     asker_username: String;
     upvotes: Number;
     comments: Number;
+    tags: Array<String>;
 
-    constructor(question_id: Number, question: String, asker_username: String, upvotes: Number, comments: Number) { 
+    constructor(question_id: Number, question: String, asker_username: String, upvotes: Number, comments: Number, tags: Array<String>) { 
         this.question_id = question_id;
         this.question = question;
         this.upvotes = upvotes;
         this.asker_username = asker_username;
         this.comments = comments;
+        this.tags = tags;
     }
 
     public QuestionToObject(): Object {

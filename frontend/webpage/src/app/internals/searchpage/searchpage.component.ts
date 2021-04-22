@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { SearchService } from 'src/app/_services/SearchService/search.service';
 import { Question } from 'src/app/_shared/QuestionsModel';
+import { User } from 'src/app/_shared/UserModel';
 
 @Component({
   selector: 'app-searchpage',
@@ -12,12 +14,21 @@ export class SearchpageComponent implements OnInit {
 
   constructor(private SearchService: SearchService, private route: ActivatedRoute) { }
 
+  searchquery: String;
+
+  showpage = new FormControl('question');
+
   questions: Array<Question> = [];
+  profiles: Array<User> = [];
 
   ngOnInit(): void {
-    let searchquery = this.route.params.subscribe((params: Params) => {
-      return params.searchquery;
+    this.route.queryParamMap.subscribe(queryParams => {
+      this.searchquery = queryParams.get("searchquery");
     });
-    this.questions = this.SearchService.retrievesearchquery(searchquery);
+    console.log(this.searchquery);
+    this.questions = this.SearchService.retrievequestionsearchquery(this.searchquery);
+    this.profiles = this.SearchService.retrieveprofilesearchquery(this.searchquery);
+
+    console.log(this.profiles);
   }
 }
