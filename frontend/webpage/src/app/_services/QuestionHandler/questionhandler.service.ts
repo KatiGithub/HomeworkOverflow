@@ -15,7 +15,7 @@ export class QuestionhandlerService {
 
     for(let x = 0; x < 10; x++) {
       // console.log(this.ListQuestion);
-      ListQuestion.push(new Question(x, this.testquestion, this.asker_username_testlist[x], Math.floor(Math.random() * 1000), Math.floor(Math.random() * 60), ['math']));
+      ListQuestion.push(new Question(x, this.testquestion, this.asker_username_testlist[x], Math.floor(Math.random() * 1000), Math.floor(Math.random() * 60), ['math', 'science', 'arithmetics']));
       // this.ListQuestion[x] = new Question(this.testquestion, this.asker_username_testlist[x], Math.floor(Math.random() * 1000), Math.floor(Math.random() * 60)).QuestionToObject();
     }
 
@@ -26,7 +26,7 @@ export class QuestionhandlerService {
     let ArrayofQuestion: Array<Question> = [];
 
     for(let x = 0; x < 10; x++) {
-      ArrayofQuestion.push(new Question(x, this.testquestion, this.asker_username_testlist[x], Math.floor(Math.random() * 1000), Math.floor(Math.random() * 60), ['math']));
+      ArrayofQuestion.push(new Question(x, this.testquestion, this.asker_username_testlist[x], Math.floor(Math.random() * 1000), Math.floor(Math.random() * 60), ['math', 'science', 'arithmetics']));
     }
 
     return ArrayofQuestion;
@@ -43,7 +43,7 @@ export class QuestionhandlerService {
 
   RetrieveQuestionbyID(question_id: Number): Question {
 
-    return new Question(question_id, this.testquestion, this.asker_username_testlist[3], Math.floor(Math.random() * 1000), Math.floor(Math.random() * 60), ['math']);
+    return new Question(question_id, this.testquestion, this.asker_username_testlist[3], Math.floor(Math.random() * 1000), Math.floor(Math.random() * 60), ['math', 'science', 'arithmetics']);
   }
 
   upvoteanswer(answer_id: Number): void {

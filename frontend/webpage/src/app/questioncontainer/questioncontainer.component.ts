@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Question } from '../_shared/QuestionsModel';
 
 @Component({
@@ -10,9 +11,18 @@ export class QuestioncontainerComponent implements OnInit {
 
   @Input('QuestionItem') question: Question;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+    console.log(this.question.tags);
+  }
+
+  onTagNavigate(tag: String) {
+    let tagSearchQuery = 'tag:' + tag; 
+
+    this.router.navigate(['search'], {
+      queryParams: {searchquery: tagSearchQuery}
+    });
   }
 
 }

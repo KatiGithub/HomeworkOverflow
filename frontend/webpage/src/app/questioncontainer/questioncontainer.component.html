@@ -3,6 +3,14 @@
     {{ question.question }}
   </a>
 
+  <div fxLayout="row">
+    <div *ngFor="let tag of question.tags">
+      <a class="post-tag" (click)="onTagNavigate(tag)">
+        {{ tag }}
+      </a>
+    </div>
+  </div>
+
   <a id="asker_username" [routerLink]="['/profile', question.asker_username]" style="color: black;">
     {{ question.asker_username }}
   </a>
