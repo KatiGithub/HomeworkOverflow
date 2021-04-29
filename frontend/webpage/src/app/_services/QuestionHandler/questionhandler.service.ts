@@ -46,6 +46,12 @@ export class QuestionhandlerService {
     return new Question(question_id, this.testquestion, this.asker_username_testlist[3], Math.floor(Math.random() * 1000), Math.floor(Math.random() * 60), ['math', 'science', 'arithmetics']);
   }
 
+  submitaskquestion(question: String, questiontitle: String) {
+    console.log("Question Asked!")
+
+    return true;
+  }
+
   upvoteanswer(answer_id: Number): void {
     console.log('Upvoted answer id: ' + answer_id);
   }

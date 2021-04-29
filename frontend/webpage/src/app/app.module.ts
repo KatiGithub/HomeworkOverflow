@@ -63,6 +63,10 @@ import { AuthGuardService } from './_services/AuthGuardService/AuthGuardService'
 import { SearchpageComponent } from './internals/searchpage/searchpage.component';
 import { ProfilecontainerComponent } from './profilecontainer/profilecontainer.component';
 import { SignupPageComponent } from './signup-page/signup-page.component';
+import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
+import { AskQuestionPageComponent } from './internals/ask-question-page/ask-question-page.component';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -76,6 +80,8 @@ import { SignupPageComponent } from './signup-page/signup-page.component';
     SearchpageComponent,
     ProfilecontainerComponent,
     SignupPageComponent,
+    RightSidebarComponent,
+    AskQuestionPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -121,11 +127,16 @@ import { SignupPageComponent } from './signup-page/signup-page.component';
     FormsModule,
     ReactiveFormsModule,
     ScrollingModule,
-    QuillModule.forRoot()
+    QuillModule.forRoot(),
+    FontAwesomeModule
   ],
   providers: [
     AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas)
+  }
+}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../_services/SearchService/search.service';
 import { FormControl } from '@angular/forms';
 import { SequenceEqualOperator } from 'rxjs/internal/operators/sequenceEqual';
+import { AuthService } from '../_services/AuthService/auth-service.service';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,7 @@ import { SequenceEqualOperator } from 'rxjs/internal/operators/sequenceEqual';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private SearchService: SearchService) { }
+  constructor(private SearchService: SearchService, private AuthService: AuthService) { }
 
   searchquery =  new FormControl('');
 
@@ -21,4 +22,7 @@ export class HeaderComponent implements OnInit {
     this.SearchService.submitsearchquery(this.searchquery.value);
   }
 
+  logout() {
+    this.AuthService.logout();
+  }
 }

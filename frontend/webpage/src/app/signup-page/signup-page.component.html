@@ -1,1 +1,29 @@
-<p>signup-page works!</p>
+<div height="100%" fxLayoutAlign="center center" class="parent">
+    <mat-card class="main-card" tabindex="0" fxFlex.xl>
+      <mat-card-header>
+        <mat-card-title>
+          <p>
+            Login
+          </p>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px" class="container" role="group">
+          <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Username" type="username"/>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" type="password"/>
+          </mat-form-field>
+        </div>
+        <hr>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>SIGN IN</button>
+        <button mat-button>CREATE NEW USER</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  

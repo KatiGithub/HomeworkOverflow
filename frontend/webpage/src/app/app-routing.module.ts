@@ -6,6 +6,8 @@ import { ProfilePageComponentComponent } from './internals/profile-page-componen
 import { AnswerPageComponent } from './internals/answer-page/answer-page.component';
 import { AuthGuardService } from './_services/AuthGuardService/AuthGuardService';
 import { SearchpageComponent } from './internals/searchpage/searchpage.component';
+import { AskQuestionPageComponent } from './internals/ask-question-page/ask-question-page.component';
+import { SignupPageComponent } from './signup-page/signup-page.component';
 
 const routes: Routes = [
   {
@@ -37,13 +39,20 @@ const routes: Routes = [
     redirectTo: '/login',
     pathMatch: 'full'
   },
-  
+  {
+    path: 'askquestion',
+    component: AskQuestionPageComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'signup',
+    component: SignupPageComponent
+  },
   {
     path: '**',
     redirectTo: '/login',
     pathMatch: 'full'
   },
-  
 ];
 
 @NgModule({

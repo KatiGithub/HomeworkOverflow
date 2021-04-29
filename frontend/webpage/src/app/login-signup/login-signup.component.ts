@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-signup.component.css'],
 })
 export class LoginSignupComponent implements OnInit {
-  constructor(private authservice: AuthService, private router: Router) {}
+  constructor(private authservice: AuthService, public router: Router) {}
 
   ngOnInit(): void {
     if(this.authservice.isActivated()) {

@@ -27,6 +27,12 @@ export class AuthService {
 
   }
 
+  logout(): void {
+    localStorage.removeItem('current_user');
+
+    this.router.navigate(['']);
+  }
+
   isActivated(): boolean {
     console.log(localStorage.getItem('current_user'));
     if(localStorage.getItem('current_user') != null) {
