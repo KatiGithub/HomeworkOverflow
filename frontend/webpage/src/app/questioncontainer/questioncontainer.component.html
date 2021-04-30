@@ -11,8 +11,12 @@
     </div>
   </div>
 
-  <a id="asker_username" [routerLink]="['/profile', question.asker_username]" style="color: black;">
-    {{ question.asker_username }}
-  </a>
+  <div fxLayout="column">
+    <a id="asker_username" [routerLink]="['/profile', question.asker_username]" style="color: black;">
+      {{ question.asker_username }}
+    </a>
+
+    {{ question.date_asked.toTimeString() }}
+  </div>
 </div>
 <hr />
