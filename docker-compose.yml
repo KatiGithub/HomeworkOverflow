@@ -5,3 +5,9 @@ services:
       container_name: homeworkoverflow-frontend
       ports: 
         - 4200:4200
+    backend-spring-boot:
+      build: ./backend/homeworkoverflow-backend
+      image: backend/backend-spring-boot
+      container_name: homeworkoverflow-backend
+      ports:
+        - 8080:8080
