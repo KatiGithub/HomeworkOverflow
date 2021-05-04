@@ -35,4 +35,12 @@ export class LoginSignupComponent implements OnInit {
       this.credentials.value['password']
     );
   }
+
+  loginGoogle() {
+    this.authservice.doGoogleLogin();
+  }
+
+  loginFacebook() {
+    this.authservice.doFacebookLogin();
+  }
 }

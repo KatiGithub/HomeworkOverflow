@@ -8,12 +8,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @RestController
-public class HomeworkoverflowController {
+public class QuestionController {
     
-    @RequestMapping(value="/test/", method=RequestMethod.GET)
+    @RequestMapping(value="/test2/", method=RequestMethod.GET)
     public String getTest() {
-        return "test request";
+        return "test2 request";
     }
-    
-    
 }

@@ -75,9 +75,12 @@
                     <div class="card-body">
                       <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Questions Answered</h6>
                      <div class="list-group list-group-flush">
-                      <a class="list-group-item list-group-item-action" *ngFor="let question of this.questionhandler.RetrieveQuestionsAnsweredbyUser(this.userondisplay.username)" [routerLink]="['/question', question.question_id]">
-                        {{ question.question }}
-                      </a>
+                       <div *ngFor="let question of userquestions">
+                        <a class="list-group-item list-group-item-action"  [routerLink]="['/question', question.question_id]">
+                          {{ question.question }}
+                        </a>
+                       </div>
+
                      </div>
                     </div>
                   </div>

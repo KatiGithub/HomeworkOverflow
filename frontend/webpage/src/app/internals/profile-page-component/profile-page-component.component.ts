@@ -26,6 +26,7 @@ export class ProfilePageComponentComponent implements OnInit {
 
     console.log(this.asker_username);
     this.userondisplay = this.ProfileService.retrieveprofile(this.asker_username);
+    this.userquestions = this.questionhandler.RetrieveQuestionsAnsweredbyUser(this.asker_username);
   }
   
 }

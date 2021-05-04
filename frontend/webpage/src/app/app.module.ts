@@ -68,6 +68,10 @@ import { AskQuestionPageComponent } from './internals/ask-question-page/ask-ques
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -128,7 +132,9 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
     ReactiveFormsModule,
     ScrollingModule,
     QuillModule.forRoot(),
-    FontAwesomeModule
+    FontAwesomeModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
     AuthGuardService
