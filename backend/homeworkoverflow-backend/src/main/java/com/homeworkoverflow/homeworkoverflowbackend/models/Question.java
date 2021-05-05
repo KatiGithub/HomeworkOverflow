@@ -8,19 +8,19 @@ public class Question {
     private Integer questionId;
     private String questionTitle;
     private String questionContent;
-    private String askerUsername;
+    private String askeremail;
     private String[] tags;
     private Date dateAsked;
     private Integer numberOfComments;
     private Integer upvotes;
 
     @Autowired(required = true)
-    public Question(Integer questionId, String questionTitle, String questionContent, String askerUsername,
+    public Question(Integer questionId, String questionTitle, String questionContent, String askeremail,
             String[] tags, Date dateAsked, Integer numberOfComments, Integer upvotes) {
         this.questionId = questionId;
         this.questionTitle = questionTitle;
         this.questionContent = questionContent;
-        this.askerUsername = askerUsername;
+        this.askeremail = askeremail;
         this.tags = tags;
         this.dateAsked = dateAsked;
         this.numberOfComments = numberOfComments;
@@ -53,12 +53,12 @@ public class Question {
         this.questionContent = questionContent;
     }
 
-    public String getAskerUsername() {
-        return this.askerUsername;
+    public String getAskeremail() {
+        return this.askeremail;
     }
 
-    public void setAskerUsername(String askerUsername) {
-        this.askerUsername = askerUsername;
+    public void setAskeremail(String askeremail) {
+        this.askeremail = askeremail;
     }
 
     public String[] getTags() {
