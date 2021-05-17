@@ -4,11 +4,12 @@
             "previewLimit": 50,
             "server": "localhost",
             "port": 5432,
-            "askForPassword": true,
             "driver": "PostgreSQL",
             "name": "HomeworkoverflowDB",
             "database": "homeworkoverflow",
-            "username": "postgres"
+            "username": "postgres",
+            "password": "music_2001"
         }
-    ]
+    ],
+    "python.pythonPath": "/bin/python3"
 }

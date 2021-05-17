@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,24 +15,35 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.homeworkoverflow.homeworkoverflowbackend.models.Answer;
 import com.homeworkoverflow.homeworkoverflowbackend.models.Question;
-
+import com.homeworkoverflow.homeworkoverflowbackend.repositories.ManageQuestions;
+import com.homeworkoverflow.homeworkoverflowbackend.repositories.Question.QuestionRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class QuestionController {
 
+    Logger logger = LoggerFactory.getLogger(QuestionController.class);
+
     ObjectMapper objectMapper;
     HttpHeaders responseHeaders;
-
+    // private ManageQuestions qManageQuestions = new ManageQuestions();
+    
     @Autowired
+    QuestionRepository questionRepository;
+
     public QuestionController() {
-        this.objectMapper = new ObjectMapper();
+        // this.objectMapper = new ObjectMapper();
         responseHeaders = new HttpHeaders();
 
         this.responseHeaders.setContentType(MediaType.APPLICATION_JSON);
     }
     
     public ResponseEntity<String> retrieveQuestionsById(Integer questionId) throws JsonProcessingException {
-        String[] tagsList = { "test", "test" };
+        List<String> tagsList = new ArrayList<String>();
+        tagsList.add("test");
+        tagsList.add("test");
+        
         Question question = new Question(1, "title", "content", "username", tagsList, new Date(), 5, 10);
 
         String idQuestionAsString = this.objectMapper.writeValueAsString(question);
@@ -43,17 +55,12 @@ public class QuestionController {
 
         List<String> questions = new ArrayList<String>();
 
-        String[] tagsList = { "test", "test" };
+        logger.debug("Test2");
 
-        for(Integer x = 0; x < 10; x++) {
-            Question question = new Question(x + 1, "title", "content", "username", tagsList, new Date(), 5, 10);
-
-            try {
-                String questionString = this.objectMapper.writeValueAsString(question);
-                questions.add(questionString);
-            } catch(JsonProcessingException e) {
-                System.out.println("Encountered JSONProcessingException: retrieveQuestionforHome");
-            }           
+        List<Question> questionsList = new ArrayList<Question>();
+        questionsList = this.questionRepository.getHomePage();
+        for(Iterator iterator = questionsList.iterator(); iterator.hasNext();) {
+            questions.add(iterator.next().toString());     
         }
 
         return new ResponseEntity<String>(questions.toString(), this.responseHeaders, HttpStatus.FOUND);
@@ -62,7 +69,9 @@ public class QuestionController {
     public ResponseEntity<String> retrieveQuestionsAnsweredByUsers(String username) {
         List<String> questionsByUsers = new ArrayList<String>();
 
-        String[] tagsList = { "test", "test" };
+        List<String> tagsList = new ArrayList<String>();
+        tagsList.add("test");
+        tagsList.add("test");
 
         for(Integer x = 0; x < 10; x++) {
             Question question = new Question(x + 1, "title", "content", "username", tagsList, new Date(), 5, 10);
