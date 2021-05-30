@@ -1,0 +1,23 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+    <class name="Question" table="tblquestion">
+        <meta attribute="class-description">
+            This class containers the question's detail.
+        </meta>
+
+        <id name="questionid" type="int" column="id">
+            <generator class="native"></generator>
+        </id>
+
+        <property name="questionTitle" column="questiontitle" type="string"></property>
+        <property name="questionContent" column="questioncontent" type="string"></property>
+        <property name="askeremail" column="askeremail" type="string"></property>
+        <property name="tags" column="tags" type=""></property>
+        <property name="dateAsked" column="dateasked"></property>
+        <property name="numberOfComments" column="numberofcomments"></property>
+        <property name="upvotes" column="numberofupvotes"></property>
+    </class>
+</hibernate-mapping>
