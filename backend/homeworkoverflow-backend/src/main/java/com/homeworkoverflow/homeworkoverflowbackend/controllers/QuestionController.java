@@ -1,12 +1,16 @@
 package com.homeworkoverflow.homeworkoverflowbackend.controllers;
 
+import org.apache.tomcat.util.http.parser.HttpParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,25 +18,29 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.homeworkoverflow.homeworkoverflowbackend.models.Answer;
 import com.homeworkoverflow.homeworkoverflowbackend.models.Question;
+import com.homeworkoverflow.homeworkoverflowbackend.repositories.QuestionRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
+@Component
 public class QuestionController {
 
-    ObjectMapper objectMapper;
-    HttpHeaders responseHeaders;
+    private ObjectMapper objectMapper;
+    private HttpHeaders responseHeaders;
+    private QuestionRepository questionRepository;
 
-    @Autowired
-    public QuestionController() {
-        this.objectMapper = new ObjectMapper();
-        responseHeaders = new HttpHeaders();
+    public QuestionController(ObjectMapper objectMapper, QuestionRepository questionRepository) {
+        this.objectMapper = objectMapper;
+        this.responseHeaders = new HttpHeaders();
+        this.questionRepository = questionRepository;
 
         this.responseHeaders.setContentType(MediaType.APPLICATION_JSON);
     }
     
     public ResponseEntity<String> retrieveQuestionsById(Integer questionId) throws JsonProcessingException {
-        String[] tagsList = { "test", "test" };
-        Question question = new Question(1, "title", "content", "username", tagsList, new Date(), 5, 10);
+        // List<String> tagsList = new ArrayList<>();
+        // tagsList.add("test");
+        // tagsList.add("test");
+
+        Question question = questionRepository.findId(questionId);
 
         String idQuestionAsString = this.objectMapper.writeValueAsString(question);
 
@@ -41,28 +49,45 @@ public class QuestionController {
 
     public ResponseEntity<String> retrieveQuestionforHome() {
 
-        List<String> questions = new ArrayList<String>();
+        List<Question> questions = new ArrayList<Question>();
+        questions = questionRepository.findHome();
 
-        String[] tagsList = { "test", "test" };
 
-        for(Integer x = 0; x < 10; x++) {
-            Question question = new Question(x + 1, "title", "content", "username", tagsList, new Date(), 5, 10);
+        // List<String> tagsList = new ArrayList<>();
+        // tagsList.add("test");
+        // tagsList.add("test");
 
-            try {
-                String questionString = this.objectMapper.writeValueAsString(question);
-                questions.add(questionString);
-            } catch(JsonProcessingException e) {
-                System.out.println("Encountered JSONProcessingException: retrieveQuestionforHome");
-            }           
+        // for(Integer x = 0; x < 10; x++) {
+        //     Question question = new Question(x + 1, "title", "content", "username", tagsList, new Date(), 5, 10);
+
+        //     try {
+        //         String questionString = this.objectMapper.writeValueAsString(question);
+        //         questions.add(questionString);
+        //     } catch(JsonProcessingException e) {
+        //         System.out.println("Encountered JSONProcessingException: retrieveQuestionforHome");
+        //     }           
+        // }
+
+        List<String> lsQuestionString = new ArrayList<>();
+
+        for(Iterator<Question> iterator = questions.iterator(); iterator.hasNext();) {
+            lsQuestionString.add(iterator.next().toString());
         }
 
-        return new ResponseEntity<String>(questions.toString(), this.responseHeaders, HttpStatus.FOUND);
+        // questions = questionRepository.findHome();
+        // for(Iterator<Question> iterator = questions.iterator(); iterator.hasNext();) {
+        //     lsQuestionString.add(iterator.next().toString());
+        // }
+
+        return new ResponseEntity<String>(lsQuestionString.toString(), this.responseHeaders, HttpStatus.FOUND);
     }
 
     public ResponseEntity<String> retrieveQuestionsAnsweredByUsers(String username) {
         List<String> questionsByUsers = new ArrayList<String>();
 
-        String[] tagsList = { "test", "test" };
+        List<String> tagsList = new ArrayList<>();
+        tagsList.add("test");
+        tagsList.add("test");
 
         for(Integer x = 0; x < 10; x++) {
             Question question = new Question(x + 1, "title", "content", "username", tagsList, new Date(), 5, 10);

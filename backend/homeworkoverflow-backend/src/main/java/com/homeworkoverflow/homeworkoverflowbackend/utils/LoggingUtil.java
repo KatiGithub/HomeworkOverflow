@@ -1,4 +1,4 @@
-package com.homeworkoverflow.homeworkoverflowbackend.shared;
+package com.homeworkoverflow.homeworkoverflowbackend.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

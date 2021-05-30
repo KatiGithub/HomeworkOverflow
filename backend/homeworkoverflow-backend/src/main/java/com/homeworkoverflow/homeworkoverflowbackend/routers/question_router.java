@@ -17,12 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class question_router {
 
-    QuestionController qController;
-
     @Autowired
-    public question_router() {
-        this.qController = new QuestionController();
-    }
+    private QuestionController qController;
 
     @RequestMapping(value = "/question/{id}", method = RequestMethod.GET)
     public ResponseEntity<String> retrieveQuestionsById(@PathVariable("id") Integer questionId)

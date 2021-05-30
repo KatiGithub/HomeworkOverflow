@@ -1,22 +1,22 @@
 package com.homeworkoverflow.homeworkoverflowbackend.models;
 
 import java.util.Date;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Question {
     private Integer questionId;
     private String questionTitle;
     private String questionContent;
     private String askeremail;
-    private String[] tags;
+    private List<String> tags;
     private Date dateAsked;
     private Integer numberOfComments;
     private Integer upvotes;
 
-    @Autowired(required = true)
     public Question(Integer questionId, String questionTitle, String questionContent, String askeremail,
-            String[] tags, Date dateAsked, Integer numberOfComments, Integer upvotes) {
+            List<String> tags, Date dateAsked, Integer numberOfComments, Integer upvotes) {
         this.questionId = questionId;
         this.questionTitle = questionTitle;
         this.questionContent = questionContent;
@@ -27,7 +27,7 @@ public class Question {
         this.upvotes = upvotes;
     }
 
-
+    public Question() {}
 
     public Integer getQuestionId() {
         return this.questionId;
@@ -61,11 +61,11 @@ public class Question {
         this.askeremail = askeremail;
     }
 
-    public String[] getTags() {
+    public List<String> getTags() {
         return this.tags;
     }
 
-    public void setTags(String[] tags) {
+    public void setTags(List<String> tags) {
         this.tags = tags;
     }
 
@@ -91,6 +91,17 @@ public class Question {
 
     public void setUpvotes(Integer upvotes) {
         this.upvotes = upvotes;
+    }
+
+    @Override
+
+    public String toString() {
+        try {
+            return new ObjectMapper().writeValueAsString(this);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return "";
+        }
     }
 
 }
