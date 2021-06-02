@@ -6,21 +6,32 @@ import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Question {
-    private Integer questionId;
+    private Long questionId;
     private String questionTitle;
     private String questionContent;
-    private String askeremail;
+    private Long askeruserid;
     private List<String> tags;
     private Date dateAsked;
     private Integer numberOfComments;
     private Integer upvotes;
 
-    public Question(Integer questionId, String questionTitle, String questionContent, String askeremail,
+    public Question(Long questionId, String questionTitle, String questionContent, Long askeruserid,
             List<String> tags, Date dateAsked, Integer numberOfComments, Integer upvotes) {
         this.questionId = questionId;
         this.questionTitle = questionTitle;
         this.questionContent = questionContent;
-        this.askeremail = askeremail;
+        this.askeruserid = askeruserid;
+        this.tags = tags;
+        this.dateAsked = dateAsked;
+        this.numberOfComments = numberOfComments;
+        this.upvotes = upvotes;
+    }
+
+    public Question(String questionTitle, String questionContent, Long askeruserid,
+            List<String> tags, Date dateAsked, Integer numberOfComments, Integer upvotes) {
+        this.questionTitle = questionTitle;
+        this.questionContent = questionContent;
+        this.askeruserid = askeruserid;
         this.tags = tags;
         this.dateAsked = dateAsked;
         this.numberOfComments = numberOfComments;
@@ -29,11 +40,19 @@ public class Question {
 
     public Question() {}
 
-    public Integer getQuestionId() {
+    public Long getAskeruserid() {
+        return this.askeruserid;
+    }
+
+    public void setAskeruserid(Long askeruserid) {
+        this.askeruserid = askeruserid;
+    }
+
+    public Long getQuestionId() {
         return this.questionId;
     }
 
-    public void setQuestionId(Integer questionId) {
+    public void setQuestionId(Long questionId) {
         this.questionId = questionId;
     }
 
@@ -51,14 +70,6 @@ public class Question {
 
     public void setQuestionContent(String questionContent) {
         this.questionContent = questionContent;
-    }
-
-    public String getAskeremail() {
-        return this.askeremail;
-    }
-
-    public void setAskeremail(String askeremail) {
-        this.askeremail = askeremail;
     }
 
     public List<String> getTags() {

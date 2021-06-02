@@ -17,9 +17,12 @@ for x in range(1000):
     firstnames.append(names.get_first_name())
     lastnames.append(names.get_last_name())
 
-def populatetblUser():
-
+def cleartables():
+    cursor.execute("DELETE FROM tblanswer;")
+    cursor.execute("DELETE FROM tblquestion;")
     cursor.execute("DELETE FROM tbluser;")
+
+def populatetblUser():
     cursor.execute("ALTER SEQUENCE tbluser_userid_seq RESTART WITH 1;")
     myConnection.commit()
 
@@ -33,12 +36,11 @@ def populatetblUser():
     myConnection.commit()
 
 def populatetblQuestion():
-    cursor.execute("DELETE FROM tblquestion;")
     cursor.execute("ALTER SEQUENCE tblquestion_questionid_seq RESTART WITH 1;")
     myConnection.commit()
 
     for index in range(2000):
-        questionTitle = "Title of the Question"
+        questionTitle = "Title of the Question" + str(index + 1)
         questionContent = "Content of such Question"
         tags = ["math", "science", "arithmetics"]
         tagString = "ARRAY " + str(tags)
@@ -46,18 +48,43 @@ def populatetblQuestion():
         numberOfComments = random.randint(0, 1000)
         numberOfUpvotes = random.randint(0, 1000)
 
-        insert_query = """INSERT INTO tblquestion(questiontitle, questioncontent, tags, dateasked, numberofcomments, numberofupvotes, askeremail)
-                            VALUES('{0}', '{1}', {2}, '{3}', {4}, {5}, (SELECT email FROM tbluser ORDER BY RANDOM() LIMIT 1));"""
+        insert_query = """INSERT INTO tblquestion(questiontitle, questioncontent, tags, dateasked, numberofcomments, numberofupvotes, askeruserid)
+                            VALUES('{0}', '{1}', {2}, '{3}', {4}, {5}, (SELECT userid FROM tbluser ORDER BY RANDOM() LIMIT 1));"""
 
         insert_query = insert_query.format(questionTitle, questionContent, tagString, dateAsked, numberOfComments, numberOfUpvotes)
 
         cursor.execute(insert_query)
     myConnection.commit()
 
+def populatetblanswer():
+    cursor.execute("ALTER SEQUENCE tblanswer_answerid_seq RESTART WITH 1;")
+    myConnection.commit()
+
+    for index in range(2000):
+        answercontent = "Content of such answer"
+        dateAnswered = datetime.datetime.now(pytz.utc)
+        numberOfComments = random.randint(0, 1000)
+        numberOfUpvotes = random.randint(0, 1000)
+
+        insert_query = """INSERT INTO tblanswer(questionid, answeruserid, answercontent, dateposted, numberofcomments, numberofupvotes)
+                            VALUES(
+                                (SELECT questionid FROM tblquestion ORDER BY RANDOM() LIMIT 1), 
+                                (SELECT userid FROM tbluser ORDER BY RANDOM() LIMIT 1),
+                                '{0}',
+                                '{1}',
+                                {2},
+                                {3}
+                            )"""
+        insert_query = insert_query.format(answercontent, dateAnswered, numberOfComments, numberOfUpvotes)
+
+        cursor.execute(insert_query)
+    myConnection.commit()
 
 def populateDb():
+    cleartables()
     populatetblUser()
     populatetblQuestion()
+    populatetblanswer()
 
     
 def random_firebaseUid():
@@ -78,6 +105,11 @@ print("--------------------------------")
 
 
 cursor.execute("SELECT * FROM tblquestion")
+questionrecord = cursor.fetchall()
+print(questionrecord)
+print("--------------------------------")
+
+cursor.execute("SELECT * FROM tblanswer")
 questionrecord = cursor.fetchall()
 print(questionrecord)
 print("--------------------------------")

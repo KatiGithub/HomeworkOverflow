@@ -34,23 +34,27 @@ public class question_router {
     }
 
     @RequestMapping(value="/question/", method = RequestMethod.GET)
-    public ResponseEntity<String> retrieveQuestionsAnsweredByUsers(@RequestParam String username) {
+    public ResponseEntity<String> retrieveQuestionsAnsweredByUsers(@RequestParam Integer userid) {
 
-        return this.qController.retrieveQuestionsAnsweredByUsers(username);
+        return this.qController.retrieveQuestionsAnsweredByUser(userid);
     }
 
     @RequestMapping(value="/answer/{id}", method = RequestMethod.GET)
-    public ResponseEntity<String> retrieveAnswersById(@PathVariable("id") Integer questionId) {
+    public ResponseEntity<String> retrieveAnswersByAnswerId(@PathVariable("id") Long answerId) {
 
-        return this.qController.retrieveAnswersById(questionId);
+        return this.qController.retrieveAnswersByAnswerId(answerId);
+    }
+
+    @RequestMapping(value="/answer/", method = RequestMethod.GET)
+    public ResponseEntity<String> retriveAnswersByQuestionId(@RequestParam Long questionid) {
+
+        return this.qController.retrieveAnswersByQuestionId(questionid);
     }
 
     @RequestMapping(value="/addquestion/", method = RequestMethod.POST)
-    public ResponseEntity submitQuestion(@RequestBody Map<String, Object> questionDesc) {
+    public ResponseEntity submitQuestion(@RequestBody String questionDesc) {
 
-        this.qController.submitQuestion(questionDesc);
-
-        return new ResponseEntity(HttpStatus.OK);
+        return this.qController.submitQuestion(questionDesc);
     }
 
     @RequestMapping(value="/upvote/{id}", method = RequestMethod.GET)

@@ -2,38 +2,40 @@ package com.homeworkoverflow.homeworkoverflowbackend.models;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class Answer {
-    // Boolean upvote;
-    // Boolean downvote;
-    Integer answer_id;
-    Integer questionId;
+    Long answer_id;
+    Long questionId;
     String answerContent;
-    String answer_username;
+    Long answeruserid;
+
+    
     Date date_posted;
     Integer upvotes;
     Integer comments;
 
     @Autowired
-    public Answer(Integer answer_id, Integer questionContent, String answerContent, String answer_username,
-            Date date_posted, Integer upvotes, Integer comments) {
-        // this.upvote = upvote;
-        // this.downvote = downvote;
+    public Answer(Long answer_id, Long questionContent, String answerContent,
+            Date date_posted, Integer upvotes, Integer comments, Long answeruserid) {
         this.answer_id = answer_id;
-        this.questionId = questionId;
         this.answerContent = answerContent;
-        this.answer_username = answer_username;
         this.date_posted = date_posted;
         this.upvotes = upvotes;
         this.comments = comments;
+        this.answeruserid = answeruserid;
     }
 
-    public Integer getQuestionId() {
+    public Answer() {}
+
+    public Long getQuestionId() {
         return this.questionId;
     }
 
-    public void setQuestionId(Integer questionId) {
+    public void setQuestionId(Long questionId) {
         this.questionId = questionId;
     }
 
@@ -45,20 +47,20 @@ public class Answer {
         this.answerContent = answerContent;
     }
 
-    public Integer getAnswer_id() {
+    public Long getAnswer_id() {
         return this.answer_id;
     }
 
-    public void setAnswer_id(Integer answer_id) {
+    public void setAnswer_id(Long answer_id) {
         this.answer_id = answer_id;
     }
 
-    public String getAnswer_username() {
-        return this.answer_username;
+    public Long getAnsweruserid() {
+        return this.answeruserid;
     }
 
-    public void setAnswer_username(String answer_username) {
-        this.answer_username = answer_username;
+    public void setAnsweruserid(Long answeruserid) {
+        this.answeruserid = answeruserid;
     }
 
     public Date getDate_posted() {
@@ -83,6 +85,17 @@ public class Answer {
 
     public void setComments(Integer comments) {
         this.comments = comments;
+    }
+
+    @Override
+    public String toString() {
+        try {
+            return new ObjectMapper().writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+
+            return "";
+        }
     }
 
 }
