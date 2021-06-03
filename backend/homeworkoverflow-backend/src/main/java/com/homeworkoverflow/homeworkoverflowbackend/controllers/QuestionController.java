@@ -10,16 +10,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.homeworkoverflow.homeworkoverflowbackend.models.Answer;
 import com.homeworkoverflow.homeworkoverflowbackend.models.Question;
+import com.homeworkoverflow.homeworkoverflowbackend.models.User;
+import com.homeworkoverflow.homeworkoverflowbackend.repositories.AuthRepository;
 import com.homeworkoverflow.homeworkoverflowbackend.repositories.QuestionRepository;
+import com.homeworkoverflow.homeworkoverflowbackend.utils.FirebaseAdmin;
 
 @Component
 public class QuestionController {
@@ -27,11 +28,15 @@ public class QuestionController {
     private ObjectMapper objectMapper;
     private HttpHeaders responseHeaders;
     private QuestionRepository questionRepository;
+    private FirebaseAdmin firebaseAdmin;
+    private AuthRepository authRepository;
 
-    public QuestionController(ObjectMapper objectMapper, QuestionRepository questionRepository) {
+    public QuestionController(ObjectMapper objectMapper, QuestionRepository questionRepository, FirebaseAdmin firebaseAdmin, AuthRepository authRepository) {
         this.objectMapper = objectMapper;
         this.responseHeaders = new HttpHeaders();
         this.questionRepository = questionRepository;
+        this.firebaseAdmin = firebaseAdmin;
+        this.authRepository = authRepository;
 
         this.responseHeaders.setContentType(MediaType.APPLICATION_JSON);
     }
@@ -107,19 +112,22 @@ public class QuestionController {
         }
     }
 
-    public ResponseEntity submitQuestion(String questionDesc) {
-        Question question;
-        try {
-            question = objectMapper.readValue(questionDesc, Question.class);
+    public ResponseEntity submitQuestion(String questionDesc, String jwtToken) {
 
+        try {
+            Question question = this.objectMapper.readValue(questionDesc, Question.class);
+            System.out.println(question.toString());
+
+            User QuestionSubmitter = firebaseAdmin.getUser(jwtToken);
+            Long idQuestionSubmitter = authRepository.getUserId(QuestionSubmitter.getEmail());
+
+
+            question.setAskeruserid(idQuestionSubmitter);
             questionRepository.submitQuestion(question);
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } catch (DataAccessException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
