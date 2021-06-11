@@ -18,9 +18,7 @@ public class AnswerRowMapper implements RowMapper<Answer> {
         answer.setAnsweruserid(rs.getLong("answeruserid"));
         answer.setAnswerContent(rs.getString("answercontent"));
         answer.setDate_posted(rs.getDate("dateposted"));
-        answer.setComments(rs.getInt("numberofcomments"));
-        answer.setUpvotes(rs.getInt("numberofupvotes"));
-
+        answer.setUpvotes(rs.getInt("upvotes"));
         return answer;
     }
     

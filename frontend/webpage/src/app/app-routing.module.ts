@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginSignupComponent } from './login-signup/login-signup.component';
-import { HomePageComponent } from './internals/home-page/home-page.component';
-import { ProfilePageComponentComponent } from './internals/profile-page-component/profile-page-component.component';
-import { AnswerPageComponent } from './internals/answer-page/answer-page.component';
-import { AuthGuardService } from './_services/AuthGuardService/AuthGuardService';
-import { SearchpageComponent } from './internals/searchpage/searchpage.component';
-import { AskQuestionPageComponent } from './internals/ask-question-page/ask-question-page.component';
-import { SignupPageComponent } from './signup-page/signup-page.component';
+import { LoginSignupComponent } from './components/login-signup/login-signup.component';
+import { HomePageComponent } from './components/internals/home-page/home-page.component';
+import { ProfilePageComponentComponent } from './components/internals/profile-page-component/profile-page-component.component';
+import { AnswerPageComponent } from './components/internals/answer-page/answer-page.component';
+import { AuthGuardService } from './services/AuthGuardService/AuthGuardService';
+import { SearchpageComponent } from './components/internals/searchpage/searchpage.component';
+import { AskQuestionPageComponent } from './components/internals/ask-question-page/ask-question-page.component';
+import { SignupPageComponent } from './components/signup-page/signup-page.component';
 
 const routes: Routes = [
   {

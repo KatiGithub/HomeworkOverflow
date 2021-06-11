@@ -43,26 +43,32 @@ public class FirebaseAdmin {
     }
 
     public User getUser(String idToken) {
-        FirebaseToken firebaseToken;
-
         try {
+            FirebaseToken firebaseToken = null;
             firebaseToken = FirebaseAuth.getInstance().verifyIdToken(idToken);
+            User user = new User();
+
+            user.setEmail(firebaseToken.getEmail());
+            user.setFirebaseuid(firebaseToken.getUid());
+            
+            String fullname = firebaseToken.getName();
+            String firstname = fullname.substring(0, fullname.indexOf(" "));
+            String lastname = fullname.substring(fullname.indexOf(" ") + 1, fullname.length());
+    
+            user.setFirstname(firstname);
+            user.setLastname(lastname);
+    
+            return user;
         } catch (FirebaseAuthException ex) {
+            ex.printStackTrace();
+            try {
+                throw ex;
+            } catch (FirebaseAuthException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }   
+
             return null;
         }
-        
-        User user = new User();
-
-        user.setEmail(firebaseToken.getEmail());
-        user.setFirebaseuid(firebaseToken.getUid());
-        
-        String fullname = firebaseToken.getName();
-        String firstname = fullname.substring(0, fullname.indexOf(" "));
-        String lastname = fullname.substring(fullname.indexOf(" ") + 1, fullname.length());
-
-        user.setFirstname(firstname);
-        user.setLastname(lastname);
-
-        return user;
     }
 }

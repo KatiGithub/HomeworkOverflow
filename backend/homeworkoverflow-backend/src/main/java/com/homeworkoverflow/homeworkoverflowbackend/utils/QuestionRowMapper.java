@@ -17,11 +17,9 @@ public class QuestionRowMapper implements RowMapper<Question> {
 
         question.setQuestionId(rs.getLong("questionid"));
         question.setAskeruserid(rs.getLong("askeruserid"));
-        question.setNumberOfComments(rs.getInt("numberofcomments"));
         question.setQuestionContent(rs.getString("questioncontent"));
         question.setQuestionTitle(rs.getString("questiontitle"));
         question.setDateAsked(rs.getDate("dateasked"));
-        question.setUpvotes(rs.getInt("numberofupvotes"));
 
         List<String> tags = Arrays.stream((String[]) rs.getArray("tags").getArray()).collect(Collectors.toList());
         question.setTags(tags);

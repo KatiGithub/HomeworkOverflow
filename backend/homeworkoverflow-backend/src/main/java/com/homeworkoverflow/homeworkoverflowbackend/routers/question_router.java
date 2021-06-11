@@ -3,6 +3,8 @@ import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.homeworkoverflow.homeworkoverflowbackend.controllers.QuestionController;
+import com.homeworkoverflow.homeworkoverflowbackend.utils.JwtTokenExtractor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,20 +55,20 @@ public class question_router {
     }
 
     @RequestMapping(value="/addquestion/", method = RequestMethod.POST)
-    public ResponseEntity submitQuestion(@RequestBody String questionDesc, @RequestHeader("Authorization") String jwtToken) {
+    public ResponseEntity submitQuestion(@RequestBody String questionDesc, @RequestHeader("Authorization") String authorizationheader) {
 
-        return this.qController.submitQuestion(questionDesc, jwtToken);
+        return this.qController.submitQuestion(questionDesc, JwtTokenExtractor.ExtractFromHeader(authorizationheader));
     }
 
     @RequestMapping(value="/upvote/{id}", method = RequestMethod.GET)
-    public ResponseEntity upvoteAnswer(@PathVariable("id") Integer questionId) {
+    public ResponseEntity upvoteAnswer(@PathVariable("id") Long answerid, @RequestHeader("Authorization") String authorizationheader) {
 
-        return new ResponseEntity(HttpStatus.OK);
+        return this.qController.upvoteAnswer(answerid, JwtTokenExtractor.ExtractFromHeader(authorizationheader));
     }
     
-    @RequestMapping(value="/downvote/{id}", method = RequestMethod.GET)
-    public ResponseEntity downvoteAnswer(@PathVariable("id") Integer questionId) {
+    // @RequestMapping(value="/downvote/{id}", method = RequestMethod.GET)
+    // public ResponseEntity downvoteAnswer(@PathVariable("id") Integer questionId, @RequestHeader("Authorization") String authorizationheader) {
 
-        return new ResponseEntity(HttpStatus.OK);
-    }
+    //     return new ResponseEntity(HttpStatus.OK);
+    // }
 }

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -19,8 +18,12 @@ public class auth_router {
     private AuthController authController;
 
     @RequestMapping(value="/signup/", method=RequestMethod.POST)
-    public ResponseEntity requestMethodName(@RequestBody String tokenBody) {
+    public ResponseEntity signup(@RequestBody String tokenBody) {
         return authController.signup(tokenBody);
     }
     
+    @RequestMapping(value="/login/", method=RequestMethod.POST)
+    public ResponseEntity login(@RequestBody String loginBody) {
+        return authController.login(loginBody);
+    }
 }

@@ -18,9 +18,10 @@ for x in range(1000):
     lastnames.append(names.get_last_name())
 
 def cleartables():
+    cursor.execute("DELETE FROM tblupvote;")
     cursor.execute("DELETE FROM tblanswer;")
     cursor.execute("DELETE FROM tblquestion;")
-    cursor.execute("DELETE FROM tbluser;")
+    cursor.execute("DELETE FROM tbluser WHERE email != 'kati.pairojtanachai@gmail.com';")
 
 def populatetblUser():
     cursor.execute("ALTER SEQUENCE tbluser_userid_seq RESTART WITH 1;")
@@ -30,8 +31,8 @@ def populatetblUser():
             email = str(random.randint(100, 2000)) + "@test.com"
             firebaseUid = random_firebaseUid()
             insert_query = ""
-            insert_query = """INSERT INTO tbluser (firstname, lastname, email, firebaseuid) VALUES('{0}', '{1}', '{2}', '{3}');""" 
-            insert_query = insert_query.format(firstnames[index], lastnames[index], str(index) +'@test.com', firebaseUid)
+            insert_query = """INSERT INTO tbluser (firstname, lastname, email, firebaseuid, title) VALUES('{0}', '{1}', '{2}', '{3}', '{4}');""" 
+            insert_query = insert_query.format(firstnames[index], lastnames[index], str(index) +'@test.com', firebaseUid, 'Frontend Dev')
             cursor.execute(insert_query)
     myConnection.commit()
 
@@ -48,8 +49,8 @@ def populatetblQuestion():
         numberOfComments = random.randint(0, 1000)
         numberOfUpvotes = random.randint(0, 1000)
 
-        insert_query = """INSERT INTO tblquestion(questiontitle, questioncontent, tags, dateasked, numberofcomments, numberofupvotes, askeruserid)
-                            VALUES('{0}', '{1}', {2}, '{3}', {4}, {5}, (SELECT userid FROM tbluser ORDER BY RANDOM() LIMIT 1));"""
+        insert_query = """INSERT INTO tblquestion(questiontitle, questioncontent, tags, dateasked, askeruserid)
+                            VALUES('{0}', '{1}', {2}, '{3}', (SELECT userid FROM tbluser ORDER BY RANDOM() LIMIT 1));"""
 
         insert_query = insert_query.format(questionTitle, questionContent, tagString, dateAsked, numberOfComments, numberOfUpvotes)
 
@@ -64,27 +65,38 @@ def populatetblanswer():
         answercontent = "Content of such answer"
         dateAnswered = datetime.datetime.now(pytz.utc)
         numberOfComments = random.randint(0, 1000)
-        numberOfUpvotes = random.randint(0, 1000)
+        numberOfUpvotes = 1
 
-        insert_query = """INSERT INTO tblanswer(questionid, answeruserid, answercontent, dateposted, numberofcomments, numberofupvotes)
+        insert_query = """INSERT INTO tblanswer(questionid, answeruserid, answercontent, dateposted,upvotes)
                             VALUES(
                                 (SELECT questionid FROM tblquestion ORDER BY RANDOM() LIMIT 1), 
                                 (SELECT userid FROM tbluser ORDER BY RANDOM() LIMIT 1),
                                 '{0}',
                                 '{1}',
-                                {2},
-                                {3}
-                            )"""
-        insert_query = insert_query.format(answercontent, dateAnswered, numberOfComments, numberOfUpvotes)
+                                {2}
+                            );"""
+        insert_query = insert_query.format(answercontent, dateAnswered, numberOfUpvotes)
 
         cursor.execute(insert_query)
     myConnection.commit()
+
+def populatetblupvote():
+    myConnection.commit()
+
+    for index in range(1999):
+        insert_query = """INSERT INTO tblupvote(answerid, userid) VALUES({0}, {1});"""
+        insert_query = insert_query.format(index + 1, 1001)
+
+        cursor.execute(insert_query)
+    myConnection.commit()
+
 
 def populateDb():
     cleartables()
     populatetblUser()
     populatetblQuestion()
     populatetblanswer()
+    populatetblupvote()
 
     
 def random_firebaseUid():
@@ -110,6 +122,11 @@ print(questionrecord)
 print("--------------------------------")
 
 cursor.execute("SELECT * FROM tblanswer")
+questionrecord = cursor.fetchall()
+print(questionrecord)
+print("--------------------------------")
+
+cursor.execute("SELECT * FROM tblupvote")
 questionrecord = cursor.fetchall()
 print(questionrecord)
 print("--------------------------------")

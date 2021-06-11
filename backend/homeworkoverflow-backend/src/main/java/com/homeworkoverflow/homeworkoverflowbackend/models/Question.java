@@ -12,8 +12,8 @@ public class Question {
     private Long askeruserid;
     private List<String> tags;
     private Date dateAsked;
-    private Integer numberOfComments;
-    private Integer upvotes;
+    private Integer numberOfComments = 0;
+    private Integer upvotes = 0;
 
     public Question(Long questionId, String questionTitle, String questionContent, Long askeruserid,
             List<String> tags, Date dateAsked, Integer numberOfComments, Integer upvotes) {

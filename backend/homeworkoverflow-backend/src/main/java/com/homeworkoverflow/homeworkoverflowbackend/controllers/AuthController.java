@@ -3,6 +3,7 @@ package com.homeworkoverflow.homeworkoverflowbackend.controllers;
 import java.util.HashMap;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.homeworkoverflow.homeworkoverflowbackend.models.User;
 import com.homeworkoverflow.homeworkoverflowbackend.repositories.AuthRepository;
 import com.homeworkoverflow.homeworkoverflowbackend.utils.FirebaseAdmin;
@@ -29,14 +30,34 @@ public class AuthController {
         this.responseHeaders = new HttpHeaders();
         this.responseHeaders.setContentType(MediaType.APPLICATION_JSON);
 
+
         this.firebaseAdmin = firebaseAdmin;
         this.authRepository = authRepository;
     }
 
     public ResponseEntity<String> login(String loginBody) {
-        
+        HashMap<String, String> mapCredential = new HashMap<>();
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            mapCredential = objectMapper.readValue(loginBody, HashMap.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        String email = mapCredential.get("email");
+
+        try {
+            String idtoken = mapCredential.get("token");
+            User user = firebaseAdmin.getUser(idtoken);
+
+            if(user.getEmail().equals(email)) {
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception ex) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
     }
 
     public ResponseEntity signup(String signUpBody) {

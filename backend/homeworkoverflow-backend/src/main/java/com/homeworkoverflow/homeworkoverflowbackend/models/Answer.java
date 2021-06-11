@@ -12,8 +12,6 @@ public class Answer {
     Long questionId;
     String answerContent;
     Long answeruserid;
-
-    
     Date date_posted;
     Integer upvotes;
     Integer comments;

@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginSignupComponent } from './login-signup/login-signup.component';
+import { LoginSignupComponent } from './components/login-signup/login-signup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { HttpClientModule } from '@angular/common/http';
 
 // Material Form Controls
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -53,18 +54,18 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HomePageComponent } from './internals/home-page/home-page.component';
-import { HeaderComponent } from './header/header.component';
-import { QuestioncontainerComponent } from './questioncontainer/questioncontainer.component';
-import { ProfilePageComponentComponent } from './internals/profile-page-component/profile-page-component.component';
-import { AnswerPageComponent } from './internals/answer-page/answer-page.component';
+import { HomePageComponent } from './components/internals/home-page/home-page.component';
+import { HeaderComponent } from './components/header/header.component';
+import { QuestioncontainerComponent } from './components/questioncontainer/questioncontainer.component';
+import { ProfilePageComponentComponent } from './components/internals/profile-page-component/profile-page-component.component';
+import { AnswerPageComponent } from './components/internals/answer-page/answer-page.component';
 import { QuillModule } from 'ngx-quill';
-import { AuthGuardService } from './_services/AuthGuardService/AuthGuardService';
-import { SearchpageComponent } from './internals/searchpage/searchpage.component';
-import { ProfilecontainerComponent } from './profilecontainer/profilecontainer.component';
-import { SignupPageComponent } from './signup-page/signup-page.component';
-import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
-import { AskQuestionPageComponent } from './internals/ask-question-page/ask-question-page.component';
+import { AuthGuardService } from './services/AuthGuardService/AuthGuardService';
+import { SearchpageComponent } from './components/internals/searchpage/searchpage.component';
+import { ProfilecontainerComponent } from './components/profilecontainer/profilecontainer.component';
+import { SignupPageComponent } from './components/signup-page/signup-page.component';
+import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
+import { AskQuestionPageComponent } from './components/internals/ask-question-page/ask-question-page.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
@@ -134,7 +135,8 @@ import { environment } from '../environments/environment';
     QuillModule.forRoot(),
     FontAwesomeModule,
     AngularFireAuthModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    HttpClientModule
   ],
   providers: [
     AuthGuardService

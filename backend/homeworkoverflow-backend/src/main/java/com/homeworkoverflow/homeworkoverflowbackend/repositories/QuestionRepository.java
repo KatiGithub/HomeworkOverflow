@@ -2,8 +2,6 @@ package com.homeworkoverflow.homeworkoverflowbackend.repositories;
 
 import java.util.List;
 
-import javax.xml.crypto.Data;
-
 import com.homeworkoverflow.homeworkoverflowbackend.models.Answer;
 import com.homeworkoverflow.homeworkoverflowbackend.models.Question;
 import com.homeworkoverflow.homeworkoverflowbackend.utils.AnswerRowMapper;
@@ -11,10 +9,8 @@ import com.homeworkoverflow.homeworkoverflowbackend.utils.QuestionRowMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -30,7 +26,7 @@ public class QuestionRepository {
             return questions;
         } catch (Exception ex) {
             ex.printStackTrace();
-            return null;
+            throw ex;
         }
     }
 
@@ -72,11 +68,13 @@ public class QuestionRepository {
     
     public void submitQuestion(Question question) {
         try {
-            String sql_query = String.format("INSERT INTO tblquestion(questiontitle, questioncontent, tags, dateasked, numberofcomments, numberofupvotes, askeruserid) VALUES(\"%s\", \"%s\", \"%s\", \"%s, %s, %s, %s)", question.getQuestionTitle(),
+            String sql_query = String.format("INSERT INTO tblquestion(questiontitle, questioncontent, tags, dateasked, numberofcomments, numberofupvotes, askeruserid) VALUES('%s', '%s', '%s', clock_timestamp(),%d, %d, %d)",
             question.getQuestionTitle(),
             question.getQuestionContent(),
-            question.getTags().toString(),
-            question.getDateAsked().toString(),
+            question.getTags().toString().
+                replace("[", "{").
+                replace("]", "}").
+                replace("\"", ""),
             question.getNumberOfComments(),
             question.getUpvotes(),
             question.getAskeruserid()
@@ -108,6 +106,36 @@ public class QuestionRepository {
             return answers;
         } catch (DataAccessException ex) {
             ex.printStackTrace();
+            throw ex;
+        }
+    }
+
+    // public Integer retrieveUpvotestoAnswer(Long answerid) {
+    //     try {
+    //         String sql_query = String.format("SELECT COUNT(*) FROM tblupvote WHERE answerid = %d;", answerid);
+
+    //         Integer upvotes = jdbcTemplate.queryForObject(sql_query, Integer.class);
+
+    //         return upvotes;
+    //     } catch (DataAccessException ex) {
+    //         throw ex;
+    //     }
+    // }
+
+    public void upvoteAnswer(Long answerid, Long userid) {
+        try {
+            String insert_tblupvote_query = String.format("BEGIN TRANSACTION; INSERT INTO tblupvote(answerid, userid) VALUES(%d, %d); ",
+            answerid,
+            userid);
+
+            String update_tblanswer_query = String.format("UPDATE tblanswer SET upvotes = upvotes + 1 WHERE answerid = %d; COMMIT TRANSACTION;", 
+            answerid);
+
+            String sql_query = insert_tblupvote_query + update_tblanswer_query;
+            System.out.println(sql_query);
+
+            jdbcTemplate.execute(sql_query);
+        } catch (DataAccessException ex) {
             throw ex;
         }
     }

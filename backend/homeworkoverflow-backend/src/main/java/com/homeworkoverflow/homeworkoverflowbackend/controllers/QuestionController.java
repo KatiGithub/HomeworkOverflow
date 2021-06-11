@@ -1,7 +1,5 @@
 package com.homeworkoverflow.homeworkoverflowbackend.controllers;
 
-import org.apache.tomcat.util.http.parser.HttpParser;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,6 +13,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.homeworkoverflow.homeworkoverflowbackend.models.Answer;
 import com.homeworkoverflow.homeworkoverflowbackend.models.Question;
 import com.homeworkoverflow.homeworkoverflowbackend.models.User;
@@ -90,7 +89,7 @@ public class QuestionController {
         try {
             Answer answer = new Answer();
             answer = questionRepository.findAnswerbyAnswerId(answerId);
-            
+
             return new ResponseEntity<String>(answer.toString(), this.responseHeaders, HttpStatus.FOUND);
         } catch (DataAccessException ex) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -131,11 +130,16 @@ public class QuestionController {
         }
     }
 
-    public void upvoteQuestion(Integer questionId, String jwtToken) {
+    public ResponseEntity upvoteAnswer(Long answerid, String jwtToken) {
+        try {
+            User upvoter = firebaseAdmin.getUser(jwtToken);
+            Long upvoterid = authRepository.getUserId(upvoter.getEmail());
 
-    }
+            questionRepository.upvoteAnswer(answerid, upvoterid);
 
-    public void downvoteQuestion(Integer questionId, String jwtToken) {
-
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (DataAccessException ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

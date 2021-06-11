@@ -11,20 +11,24 @@ public class User {
     String firebaseuid;
     String githubhandle;
     String twitterhandle;
+    String instagramhandle;
     String facebookhandle;
     String userlocation;
+    String title;
 
 
-    public User(Long userid, String firstname, String lastname, String email, String firebaseuid, String githubhandle, String twitterhandle, String facebookhandle, String userlocation) {
+    public User(Long userid, String firstname, String lastname, String email, String firebaseuid, String instagramhandle, String githubhandle, String twitterhandle, String facebookhandle, String userlocation, String title) {
         this.userid = userid;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.firebaseuid = firebaseuid;
+        this.instagramhandle = instagramhandle;
         this.githubhandle = githubhandle;
         this.twitterhandle = twitterhandle;
         this.facebookhandle = facebookhandle;
         this.userlocation = userlocation;
+        this.title = title;
     }
 
 
@@ -102,6 +106,23 @@ public class User {
     public void setUserlocation(String userlocation) {
         this.userlocation = userlocation;
     }
+
+    public String getInstagramhandle() {
+        return this.instagramhandle;
+    }
+
+    public void setInstagramhandle(String instagramhandle) {
+        this.instagramhandle = instagramhandle;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
 
     @Override
     public String toString() {
