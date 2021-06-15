@@ -1,7 +1,8 @@
 export class User {
-    username: String;
+    userid: Number;
+    firstname: String;
+    lastname: String;
     email: String;
-    phone: String;
     address: String;
     title: String;
 
@@ -11,19 +12,22 @@ export class User {
     facebook_username: String;
 
     constructor(
-        username?: String,
+        firstname: String,
+        lastname: String,
+        userid?: Number,
         email?: String,
-        phone?: String,
         address?: String,
         title?: String,
         github_username?: String,
         twitter_handle?: String,
         instagram_username?: String,
         facebook_username?: String) {
-            this.username = username;
+            this.firstname = firstname;
+            this.lastname = lastname;
+            this.userid = userid;
             this.email = email;
-            this.phone = phone;
             this.address = address;
+            this.title = title;
             this.github_username = github_username;
             this.twitter_handle = twitter_handle;
             this.instagram_username = instagram_username;

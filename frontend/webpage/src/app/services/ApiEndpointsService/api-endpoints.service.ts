@@ -2,12 +2,16 @@ import { Injectable } from '@angular/core';
 import { constants } from 'src/app/Config/constants';
 import { QueryStringParameters } from 'src/app/Shared/classes/query-string-parameters';
 import { UrlBuilder } from 'src/app/Shared/classes/url-builder';
+import { HttpClient } from '@angular/common/http';
+import { User } from 'src/app/Models/UserModel';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiEndpointsService {
-  constructor(private constants: constants) {}
+  constructor(
+    private constants: constants,
+    private http: HttpClient) {}
 
   // ----------------------------------------
 
@@ -97,8 +101,10 @@ export class ApiEndpointsService {
     return this.createUrlWithPathVariables('upvote', [answerid]);
   }
 
-  public retrieveProfile(userid: Number): string {
-    return this.createUrlWithPathVariables('user', [userid]);
+  public retrieveProfile(userid: Number) {
+    // return this.createUrlWithPathVariables('user', [userid]);
+    return this.http.get(
+      this.createUrlWithPathVariables('profile/user', [userid]));
   }
 
   public signup(): string {

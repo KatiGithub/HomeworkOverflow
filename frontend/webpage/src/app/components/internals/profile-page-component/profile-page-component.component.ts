@@ -14,19 +14,41 @@ export class ProfilePageComponentComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private ProfileService: ProfileService, public questionhandler: QuestionhandlerService) { }
 
-  userondisplay: User = new User();
+  userondisplay: User;
   userquestions: Array<Question> = [];
 
-  asker_username: String;
+  asker_id: Number;
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.asker_username = params.username;
+      this.asker_id = params.userid;
     });
 
-    console.log(this.asker_username);
-    this.userondisplay = this.ProfileService.retrieveprofile(this.asker_username);
-    this.userquestions = this.questionhandler.RetrieveQuestionsAnsweredbyUser(this.asker_username);
+    this.ProfileService.retrieveprofile(this.asker_id).then((data) => {
+      this.userondisplay = new User(
+        data["firstname"],
+        data["lastname"],
+        data["userid"],
+        data["email"],
+        data["userlocation"],
+        data["title"],
+        data["githubhandle"],
+        data["twitterhandle"],
+        data["facebookhandle"]
+      );
+
+      Object.keys(this.userondisplay).forEach((item) => {
+        if(this.userondisplay[item] == null) {
+          this.userondisplay[item] = "N/A";
+        }
+      })
+
+      console.log(this.userondisplay);
+    })
+    
+    this.userquestions = this.questionhandler.RetrieveQuestionsAnsweredbyUser(this.asker_id);
+
+    
   }
   
 }

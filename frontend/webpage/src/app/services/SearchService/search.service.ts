@@ -1,3 +1,4 @@
+import { NullTemplateVisitor } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Question } from 'src/app/Models/QuestionsModel';
@@ -52,27 +53,28 @@ export class SearchService {
   }
 
   retrieveprofilesearchquery(searchquery) {
-    let user = {
-      email: 'mustachewj@gmail.com',
-      phone: '0909093781',
-      address: 'Bangkok, Thailand',
-      title: 'Frontend Developer',
-    };
+    // let user = {
+    //   email: 'mustachewj@gmail.com',
+    //   phone: '0909093781',
+    //   address: 'Bangkok, Thailand',
+    //   title: 'Frontend Developer',
+    // };
 
-    // retrieve user information from Webapi
-    this.profile_searchresults = [];
-    for (let x = 0; x < this.asker_username_testlist.length; x++) {
-      this.profile_searchresults.push(
-        new User(
-          this.asker_username_testlist[x],
-          user.email,
-          user.phone,
-          user.address,
-          user.title
-        )
-      );
-    }
+    // // retrieve user information from Webapi
+    // this.profile_searchresults = [];
+    // for (let x = 0; x < this.asker_username_testlist.length; x++) {
+    //   this.profile_searchresults.push(
+    //     new User(
+    //       x,
+    //       this.asker_username_testlist[x],
+    //       user.email,
+    //       user.phone,
+    //       user.address,
+    //       user.title
+    //     )
+    //   );
+    // }
 
-    return this.profile_searchresults;
+    return null;
   }
 }

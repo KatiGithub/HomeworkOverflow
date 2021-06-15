@@ -22,7 +22,7 @@ export class QuestionhandlerService {
     return ListQuestion;
   }
 
-  RetrieveQuestionsAnsweredbyUser(username: String): Array<Question> {
+  RetrieveQuestionsAnsweredbyUser(userid: Number): Array<Question> {
     let ArrayofQuestion: Array<Question> = [];
 
     for(let x = 0; x < 10; x++) {

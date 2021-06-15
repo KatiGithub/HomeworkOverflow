@@ -8,7 +8,7 @@
                   <div class="d-flex flex-column align-items-center text-center">
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
-                      <h4>{{ this.userondisplay.username }}</h4>
+                      <h4>{{ this.userondisplay.firstname }} {{ this.userondisplay.lastname }}</h4>
                       <p class="text-secondary mb-1">{{ this.userondisplay.title }}</p>
                       <p class="text-muted font-size-sm">{{ this.userondisplay.address }}</p>
                       <button class="btn btn-primary" style="margin-right: 10px;">Follow</button>
@@ -47,15 +47,6 @@
                     </div>
                     <div class="col-sm-9 text-secondary">
                       {{ this.userondisplay.email }}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Phone</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{ this.userondisplay.phone }}
                     </div>
                   </div>
                   <hr>

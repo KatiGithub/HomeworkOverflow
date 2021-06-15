@@ -1,26 +1,21 @@
 import { Injectable, Input } from '@angular/core';
-import { empty } from 'rxjs';
+import { empty, fromEventPattern } from 'rxjs';
 import { User } from 'src/app/Models/UserModel';
+import { HttpService } from '../HttpService/http.service';
+import { ApiEndpointsService } from '../ApiEndpointsService/api-endpoints.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProfileService {
+  constructor(
+    private apiendpoints: ApiEndpointsService
+  ) {}
 
-  constructor() { }
+  retrieveprofile(userid: Number): Promise<any>{
+    let user: User;
 
-  retrieveprofile(input_username: String): User {
-
-    let user = {
-      username: input_username,
-      email: 'mustachewj@gmail.com',
-      phone: '0909093781',
-      address: 'Bangkok, Thailand',
-      title: 'Frontend Developer'
-    }
-
+    return this.apiendpoints.retrieveProfile(userid).toPromise();
     // retrieve user information from Webapi
-
-    return new User(user.username, user.email, user.phone, user.address, user.title);
   }
 }
