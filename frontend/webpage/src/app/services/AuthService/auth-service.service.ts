@@ -155,14 +155,11 @@ export class AuthService {
 
     let credentials = localStorage.getItem('current_user');
 
-    this.http.post(
-      this.apiendpointsservice.login(),
-      credentials.toString(),
-      {
-        "observe": "response"
-      }
-    ).subscribe((response) => {
-      console.log(response.byteLength);
+    this.apiendpointsservice.login(
+      credentials['token'],
+      credentials['email']
+    ).subscribe((data) => {
+      console.log(data);
     });
 
     return true;

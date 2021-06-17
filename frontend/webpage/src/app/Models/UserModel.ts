@@ -33,4 +33,5 @@ export class User {
             this.instagram_username = instagram_username;
             this.facebook_username = facebook_username;
     }
+
 }

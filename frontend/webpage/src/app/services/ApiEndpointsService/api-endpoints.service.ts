@@ -111,7 +111,13 @@ export class ApiEndpointsService {
     return this.createUrl('auth/signup/');
   }
 
-  public login(): string {
-    return this.createUrl('auth/login/');
+  public login(token: String, email: String){
+    return this.http.post(
+      this.createUrl('auth/login/'),
+      {
+        "token": token,
+        "email": email
+      }
+    );
   }
 }
