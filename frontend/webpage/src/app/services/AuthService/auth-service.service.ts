@@ -4,8 +4,7 @@ import { HttpService } from '../HttpService/http.service';
 import { ApiEndpointsService } from '../ApiEndpointsService/api-endpoints.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
-import { HttpResponse } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root',
@@ -151,26 +150,14 @@ export class AuthService {
     this.router.navigate(['']);
   }
 
-  isActivated(): boolean {
-    let validated = true;
-
-    // console.log(localStorage.getItem('current_user'));
+  isActivated() {
 
     let credentials = localStorage.getItem('current_user');
-
-    let loginreq = this.apiendpointsservice.login(
+    
+    return this.apiendpointsservice.login(
       credentials['token'],
       credentials['email']
-    ).toPromise()
-    .then((data) => {
-      // console.log(data["status"]);
-      if(data["status"] == 200) {
-        validated = true;
-      } else {
-        validated = false;
-      }
-    })
-    console.log(validated);
-    return validated;
+    );
+
   }
 }

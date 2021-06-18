@@ -2,23 +2,23 @@
 # yarn lockfile v1
 
 
-"@angular-devkit/architect@0.1200.4":
-  "integrity" "sha512-/BKaVlpbZYb65elZ+xHoKB2J2DuTstMU++dqE9T/7E0CevuMoOdkLQFQm71Kjl3eFI4i6T5d8mlLVPNE/ZWm7w=="
-  "resolved" "https://registry.npmjs.org/@angular-devkit/architect/-/architect-0.1200.4.tgz"
-  "version" "0.1200.4"
+"@angular-devkit/architect@0.1200.5":
+  "integrity" "sha512-222VZ4OeaDK3vON8V5m+w15SRWfUs5uOb4H9ij/H9/6tyHD83uWfCDoOGg+ax4wJVdWEFJIS+Vn4ijGcZCq9WQ=="
+  "resolved" "https://registry.npmjs.org/@angular-devkit/architect/-/architect-0.1200.5.tgz"
+  "version" "0.1200.5"
   dependencies:
-    "@angular-devkit/core" "12.0.4"
+    "@angular-devkit/core" "12.0.5"
     "rxjs" "6.6.7"
 
-"@angular-devkit/build-angular@~12.0.4":
-  "integrity" "sha512-2GqEWJZleb86zEa9JMeM5BsbgV0Zor4mCaBj2KSjS28+WVJ/Q77LgDEdfidPuPcXzK7n+Mzrt6qLlrX8ORkaEg=="
-  "resolved" "https://registry.npmjs.org/@angular-devkit/build-angular/-/build-angular-12.0.4.tgz"
-  "version" "12.0.4"
+"@angular-devkit/build-angular@~12.0.5":
+  "integrity" "sha512-rFbaAQPeuWM9KE9lK3J0sF6GB9nKF/s2Z7rtzKux7whGTF3Tlj8NHrcSxZTf4eBm3cnEpaiod1uPBQg8fUWD4w=="
+  "resolved" "https://registry.npmjs.org/@angular-devkit/build-angular/-/build-angular-12.0.5.tgz"
+  "version" "12.0.5"
   dependencies:
-    "@angular-devkit/architect" "0.1200.4"
-    "@angular-devkit/build-optimizer" "0.1200.4"
-    "@angular-devkit/build-webpack" "0.1200.4"
-    "@angular-devkit/core" "12.0.4"
+    "@angular-devkit/architect" "0.1200.5"
+    "@angular-devkit/build-optimizer" "0.1200.5"
+    "@angular-devkit/build-webpack" "0.1200.5"
+    "@angular-devkit/core" "12.0.5"
     "@babel/core" "7.14.3"
     "@babel/generator" "7.14.3"
     "@babel/plugin-transform-async-to-generator" "7.13.0"
@@ -28,7 +28,7 @@
     "@babel/template" "7.12.13"
     "@discoveryjs/json-ext" "0.5.2"
     "@jsdevtools/coverage-istanbul-loader" "3.0.5"
-    "@ngtools/webpack" "12.0.4"
+    "@ngtools/webpack" "12.0.5"
     "ansi-colors" "4.1.1"
     "babel-loader" "8.2.2"
     "browserslist" "^4.9.1"
@@ -77,33 +77,33 @@
     "terser-webpack-plugin" "5.1.2"
     "text-table" "0.2.0"
     "tree-kill" "1.2.2"
-    "webpack" "5.38.1"
+    "webpack" "5.39.1"
     "webpack-dev-middleware" "4.1.0"
     "webpack-dev-server" "3.11.2"
     "webpack-merge" "5.7.3"
     "webpack-subresource-integrity" "1.5.2"
 
-"@angular-devkit/build-optimizer@0.1200.4":
-  "integrity" "sha512-7lD3oXfQX00nA1FElH2cI0C8Q1rNnqMpFCTB1Bfd/7/SM+ihkL7EjIoFalN5HZuFGR536zrguSKnmv3C6wijrw=="
-  "resolved" "https://registry.npmjs.org/@angular-devkit/build-optimizer/-/build-optimizer-0.1200.4.tgz"
-  "version" "0.1200.4"
+"@angular-devkit/build-optimizer@0.1200.5":
+  "integrity" "sha512-3XlDVVak3CfIgUjDZMoON7sxnI1vxhzEm2LvVg5yN98Q7ijnfykXiIzryEcplzTMTZwGNkem0361HDs1EX8zNg=="
+  "resolved" "https://registry.npmjs.org/@angular-devkit/build-optimizer/-/build-optimizer-0.1200.5.tgz"
+  "version" "0.1200.5"
   dependencies:
     "source-map" "0.7.3"
     "tslib" "2.2.0"
     "typescript" "4.2.4"
 
-"@angular-devkit/build-webpack@0.1200.4":
-  "integrity" "sha512-Q7UYBvSsbK4ubsqJIVrnh4Q+EwVqNdRFlhekaM5XN3WH6xRsuZjTMuYDrQh5JSzFYjrKqezau1KzyKs7V1xIJQ=="
-  "resolved" "https://registry.npmjs.org/@angular-devkit/build-webpack/-/build-webpack-0.1200.4.tgz"
-  "version" "0.1200.4"
+"@angular-devkit/build-webpack@0.1200.5":
+  "integrity" "sha512-cx8DVwOmogzeHS1dsZGWummwA3T1zqsJ6q9NIL0S0ZiOScZuz0j9zAOLjBkyCj5XexOFzHv3TcAVQyzJsi1tIw=="
+  "resolved" "https://registry.npmjs.org/@angular-devkit/build-webpack/-/build-webpack-0.1200.5.tgz"
+  "version" "0.1200.5"
   dependencies:
-    "@angular-devkit/architect" "0.1200.4"
+    "@angular-devkit/architect" "0.1200.5"
     "rxjs" "6.6.7"
 
-"@angular-devkit/core@12.0.4":
-  "integrity" "sha512-gtQkLXuQK7NPkurw49//MFZWoRa9aVCIbxE2uxbDAzzQengx9nLUoezS2xVdM7m/SqVK72YL+ZFfSTXzfiSdnA=="
-  "resolved" "https://registry.npmjs.org/@angular-devkit/core/-/core-12.0.4.tgz"
-  "version" "12.0.4"
+"@angular-devkit/core@12.0.5":
+  "integrity" "sha512-zVSQV+8/vjUjsUKGlj8Kf5LioA6AXJTGI0yhHW9q1dFX4dPpbW63k0R1UoIB2wJ0F/AbYVgpnPGPe9BBm2fvZA=="
+  "resolved" "https://registry.npmjs.org/@angular-devkit/core/-/core-12.0.5.tgz"
+  "version" "12.0.5"
   dependencies:
     "ajv" "8.2.0"
     "ajv-formats" "2.0.2"
@@ -112,12 +112,12 @@
     "rxjs" "6.6.7"
     "source-map" "0.7.3"
 
-"@angular-devkit/schematics@12.0.4":
-  "integrity" "sha512-MEAAcOh1Y4R6O7HWo7mMXgRK9BSbCZ3rlx+aHmtWpNXohw0TRhNY5WmRnQTRvMA3qjR9nh0Uo7BkRpgwRfqmBw=="
-  "resolved" "https://registry.npmjs.org/@angular-devkit/schematics/-/schematics-12.0.4.tgz"
-  "version" "12.0.4"
+"@angular-devkit/schematics@12.0.5":
+  "integrity" "sha512-iW3XuDHScr3TXuunlEjF5O01zBpwpLgfr1oEny8PvseFGDlHK4Nj8zNIoIn3Yg936aiFO4GJAC/UXsT8g5vKxQ=="
+  "resolved" "https://registry.npmjs.org/@angular-devkit/schematics/-/schematics-12.0.5.tgz"
+  "version" "12.0.5"
   dependencies:
-    "@angular-devkit/core" "12.0.4"
+    "@angular-devkit/core" "12.0.5"
     "ora" "5.4.0"
     "rxjs" "6.6.7"
 
@@ -137,15 +137,15 @@
   optionalDependencies:
     "parse5" "^5.0.0"
 
-"@angular/cli@~12.0.4":
-  "integrity" "sha512-kZaJ55udB/AjQ+q8CrQfk6JGWdnJpH3c2VtbvSuR/ihiG6zMSxwpXqt1rImQN0RfffG3bsHD2SpM+T7/LKPemw=="
-  "resolved" "https://registry.npmjs.org/@angular/cli/-/cli-12.0.4.tgz"
-  "version" "12.0.4"
+"@angular/cli@~12.0.5":
+  "integrity" "sha512-MdgJ9DY3bWYsMFr9Xa+60gtVaYErhAE8ULGnUyI8zLMhWqrV1ZpJJ1WfP8pMQYx4HaKJIgx7wd8az7ZXAcF8hg=="
+  "resolved" "https://registry.npmjs.org/@angular/cli/-/cli-12.0.5.tgz"
+  "version" "12.0.5"
   dependencies:
-    "@angular-devkit/architect" "0.1200.4"
-    "@angular-devkit/core" "12.0.4"
-    "@angular-devkit/schematics" "12.0.4"
-    "@schematics/angular" "12.0.4"
+    "@angular-devkit/architect" "0.1200.5"
+    "@angular-devkit/core" "12.0.5"
+    "@angular-devkit/schematics" "12.0.5"
+    "@schematics/angular" "12.0.5"
     "@yarnpkg/lockfile" "1.1.0"
     "ansi-colors" "4.1.1"
     "debug" "4.3.1"
@@ -1472,10 +1472,10 @@
     "merge-source-map" "^1.1.0"
     "schema-utils" "^2.7.0"
 
-"@ngtools/webpack@12.0.4":
-  "integrity" "sha512-djmXTB7qo35Mw6olJEfVTOFRms/E4rCpcLV0GfQJqhWfUB9K/n+QbxW5cp09J48DpqlMP00C942+POBcUqbg3g=="
-  "resolved" "https://registry.npmjs.org/@ngtools/webpack/-/webpack-12.0.4.tgz"
-  "version" "12.0.4"
+"@ngtools/webpack@12.0.5":
+  "integrity" "sha512-yoKK6qhEm1iWnniz50xzOBqa3U1iUrjZs+SpLOXRZFonpwObz8j4zraR231K4uV4kXcX40qorYk9iOf+ljG4JQ=="
+  "resolved" "https://registry.npmjs.org/@ngtools/webpack/-/webpack-12.0.5.tgz"
+  "version" "12.0.5"
   dependencies:
     "enhanced-resolve" "5.7.0"
 
@@ -1606,13 +1606,13 @@
   "resolved" "https://registry.npmjs.org/@protobufjs/utf8/-/utf8-1.1.0.tgz"
   "version" "1.1.0"
 
-"@schematics/angular@12.0.4":
-  "integrity" "sha512-rC4/+c6p3S/ezDeJzAstrwzdpYgcYzHumtzVSDDM+3Kx0QBUTq/Nj6sk1e2C/fgtV5Jb2INEkTvrih+HP7I0wA=="
-  "resolved" "https://registry.npmjs.org/@schematics/angular/-/angular-12.0.4.tgz"
-  "version" "12.0.4"
+"@schematics/angular@12.0.5":
+  "integrity" "sha512-gMT66T33az+uGLDSc7UkJVg+vloPeTpQNgWddBVGnW/Lkl1tGaWUxyqUJAp8AvusPNU+NCP+ZFB3qUm+pc7tCg=="
+  "resolved" "https://registry.npmjs.org/@schematics/angular/-/angular-12.0.5.tgz"
+  "version" "12.0.5"
   dependencies:
-    "@angular-devkit/core" "12.0.4"
-    "@angular-devkit/schematics" "12.0.4"
+    "@angular-devkit/core" "12.0.5"
+    "@angular-devkit/schematics" "12.0.5"
     "jsonc-parser" "3.0.0"
 
 "@tootallnate/once@1":
@@ -8791,10 +8791,10 @@
   dependencies:
     "webpack-sources" "^1.3.0"
 
-"webpack@^4.0.0 || ^5.0.0", "webpack@^4.27.0 || ^5.0.0", "webpack@^4.4.0 || ^5.0.0", "webpack@^5.0.0", "webpack@^5.1.0", "webpack@^5.30.0", "webpack@>= 1.12.11 < 6", "webpack@>=2", "webpack@>=4.0.1", "webpack@5.38.1":
-  "integrity" "sha512-OqRmYD1OJbHZph6RUMD93GcCZy4Z4wC0ele4FXyYF0J6AxO1vOSuIlU1hkS/lDlR9CDYBz64MZRmdbdnFFoT2g=="
-  "resolved" "https://registry.npmjs.org/webpack/-/webpack-5.38.1.tgz"
-  "version" "5.38.1"
+"webpack@^4.0.0 || ^5.0.0", "webpack@^4.27.0 || ^5.0.0", "webpack@^4.4.0 || ^5.0.0", "webpack@^5.0.0", "webpack@^5.1.0", "webpack@^5.30.0", "webpack@>= 1.12.11 < 6", "webpack@>=2", "webpack@>=4.0.1", "webpack@5.39.1":
+  "integrity" "sha512-ulOvoNCh2PvTUa+zbpRuEb1VPeQnhxpnHleMPVVCq3QqnaFogjsLyps+o42OviQFoaGtTQYrUqDXu1QNkvUPzw=="
+  "resolved" "https://registry.npmjs.org/webpack/-/webpack-5.39.1.tgz"
+  "version" "5.39.1"
   dependencies:
     "@types/eslint-scope" "^3.7.0"
     "@types/estree" "^0.0.47"

@@ -6,12 +6,14 @@ import { AuthService } from '../AuthService/auth-service.service';
 export class AuthGuardService implements CanActivate {
     constructor(public auth: AuthService, public router: Router) {}
 
-    canActivate(): boolean {
-        if(this.auth.isActivated() == false) {
-            this.router.navigate(['']);
-            return false;
-        } else {
-            return true;
-        }
+    canActivate() {
+       return this.auth.isActivated().toPromise().then((data) => {
+           if(data["status"] == 200) {
+               return true;
+           } else {
+               this.auth.logout();
+               return false;
+           }
+       })
     }
 }
