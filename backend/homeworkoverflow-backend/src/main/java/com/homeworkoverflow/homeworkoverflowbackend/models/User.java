@@ -7,6 +7,7 @@ public class User {
     Long userid;
     String firstname;
     String lastname;
+    String username;
     String email;
     String firebaseuid;
     String githubhandle;
@@ -17,10 +18,11 @@ public class User {
     String title;
 
 
-    public User(Long userid, String firstname, String lastname, String email, String firebaseuid, String instagramhandle, String githubhandle, String twitterhandle, String facebookhandle, String userlocation, String title) {
+    public User(Long userid, String firstname, String username, String lastname, String email, String firebaseuid, String instagramhandle, String githubhandle, String twitterhandle, String facebookhandle, String userlocation, String title) {
         this.userid = userid;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.username = username;
         this.email = email;
         this.firebaseuid = firebaseuid;
         this.instagramhandle = instagramhandle;
@@ -58,6 +60,15 @@ public class User {
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 
     public String getEmail() {
         return this.email;

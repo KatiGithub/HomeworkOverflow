@@ -14,6 +14,7 @@ public class PublicProfileRowMapper implements RowMapper<User> {
         user.setUserid(rs.getLong("userid"));
         user.setFirstname(rs.getString("firstname"));
         user.setLastname(rs.getString("lastname"));
+        user.setUsername(rs.getString("username"));
         user.setEmail(rs.getString("email"));
         user.setGithubhandle(rs.getString("githubhandle"));
         user.setTwitterhandle(rs.getString("twitterhandle"));

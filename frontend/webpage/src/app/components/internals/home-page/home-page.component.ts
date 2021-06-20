@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Question } from 'src/app/Models/QuestionsModel';
 import { QuestionhandlerService } from '../../../services/QuestionHandler/questionhandler.service';
 
@@ -9,15 +10,26 @@ import { QuestionhandlerService } from '../../../services/QuestionHandler/questi
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private questionhandler: QuestionhandlerService) { }
+  constructor(
+      private questionhandler: QuestionhandlerService,
+      private route: ActivatedRoute
+    ) { }
 
   questions: Array<Question> = [];
 
   ngOnInit(): void {
-    this.questions = this.questionhandler.retrievequestions();
+    let observer = this.questionhandler.retrievequestions().subscribe((data: Array<any>) => {
+
+      console.log(data);
+
+      for (let element of data) {
+        this.questions.push(Question.mapObjectToQuestion(element));
+      }
+    },
+    error => {
+      console.log("ERROR")
+    });
+
     console.log(this.questions);
   }
-
-  
-
 }

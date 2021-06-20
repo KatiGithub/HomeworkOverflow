@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+const headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('current_user'))['token'],
+});
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  public get(url: string, options?: any) {
-    return this.http.get(url, options);
+  public get(url: string) {
+    console.log('Headers:');
+    console.log(headers);
+    return this.http.get(url, { headers: headers, withCredentials: true });
   }
 
-  public post(url: string, data: any, options?: any) {
-    return this.http.post(url, data, options);
+  public post(url: string, data: any) {
+    return this.http.post(url, data, { headers: headers });
   }
 }

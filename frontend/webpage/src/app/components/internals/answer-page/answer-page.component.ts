@@ -17,7 +17,7 @@ export class AnswerPageComponent implements OnInit {
   ) {}
 
   question_id: Number;
-  answers: Array<Answer>;
+  answers: Array<Answer> = [];
   question: Question;
   upvotepressed: Boolean = false;
   downvotepressed: Boolean = false;
@@ -30,72 +30,68 @@ export class AnswerPageComponent implements OnInit {
     });
 
     console.log(this.question_id);
-    this.question = this.questionhandler.RetrieveQuestionbyID(this.question_id);
-    this.answers = this.questionhandler.RetrieveAnswersofQuestion(
-      this.question_id
-    );
+    this.questionhandler.RetrieveQuestionbyID(this.question_id).subscribe((data) => {
+      console.log(data);
+      this.question = Question.mapObjectToQuestion(data);
+      console.log(this.question);
+    });
+
+    this.questionhandler.RetrieveAnswersofQuestion(this.question_id).subscribe((data: Array<any>) => {
+      console.log(data);
+      for(let element of data) {
+        this.answers.push(Answer.mapJsonToAnswer(element));
+      }
+    },
+    error => {
+      console.log(error);
+    });
+
+    
   }
 
   submitanswer(): void {
     console.log(this.answer.value);
-    this.answers.push(
-      new Answer(
-        Math.floor(Math.random() * 1000),
-        false,
-        false,
-        'Mark',
-        this.answer.value,
-        new Date(),
-        Math.floor(Math.random() * 1000),
-        Math.floor(Math.random() * 60)
-      )
-    );
+    // this.answers.push(
+    //   new Answer(
+    //     Math.floor(Math.random() * 1000),
+    //     false,
+    //     false,
+    //     'Mark',
+    //     this.answer.value,
+    //     new Date(),
+    //     Math.floor(Math.random() * 1000),
+    //     Math.floor(Math.random() * 60)
+    //   )
+    // );
     this.answer.disable();
     this.answer.reset();
   }
 
-  upvotebuttonpressed(answer): void {
+  upvotebuttonpressed(answer: Answer): void {
     console.log(answer.answer_id);
-    if(this.answers[this.answers.indexOf(answer)].upvote == false && this.answers[this.answers.indexOf(answer)].downvote == true) {
-      this.answers[this.answers.indexOf(answer)].upvote = true;
-      this.answers[this.answers.indexOf(answer)].downvote = false;
-      this.answers[this.answers.indexOf(answer)].upvotes = this.answers[this.answers.indexOf(answer)].upvotes + 2
 
-      this.questionhandler.upvoteanswer(answer.answer_id);
-    } else if(this.answers[this.answers.indexOf(answer)].upvote == true && this.answers[this.answers.indexOf(answer)].downvote == false) {
-      this.answers[this.answers.indexOf(answer)].upvote = false;
-      this.answers[this.answers.indexOf(answer)].downvote = false;
-      this.answers[this.answers.indexOf(answer)].upvotes = this.answers[this.answers.indexOf(answer)].upvotes - 1
-
-      this.questionhandler.upvoteanswer(answer.answer_id);
-    } else if(this.answers[this.answers.indexOf(answer)].upvote == false && this.answers[this.answers.indexOf(answer)].downvote == false) {
-      this.answers[this.answers.indexOf(answer)].upvote = true;
-      this.answers[this.answers.indexOf(answer)].downvote = false;
-      this.answers[this.answers.indexOf(answer)].upvotes = this.answers[this.answers.indexOf(answer)].upvotes + 1
-
-      this.questionhandler.upvoteanswer(answer.answer_id);
-    }
+    this.questionhandler.upvoteanswer(answer.answer_id).subscribe((data: Number) => {
+      answer.upvotes = data;
+      if(answer.upvote) {
+        answer.upvote = null;
+      } else if(!answer.upvote) {
+        answer.upvote = true;
+      }
+      console.log(answer);
+    });
   }
 
-  downvotebuttonpressed(answer): void {
-    console.log(answer.answer_id);
-    if(this.answers[this.answers.indexOf(answer)].downvote == false && this.answers[this.answers.indexOf(answer)].upvote == true) {
-      this.answers[this.answers.indexOf(answer)].upvote = false;
-      this.answers[this.answers.indexOf(answer)].downvote = true;
-      this.answers[this.answers.indexOf(answer)].upvotes = this.answers[this.answers.indexOf(answer)].upvotes - 2
+  downvotebuttonpressed(answer: Answer): void {
+    this.questionhandler.downvoteanswer(answer.answer_id).subscribe((data: Number) => {
+      answer.upvotes = data;
 
-      this.questionhandler.downvoteanswer(answer.answer_id);
-    } else if(this.answers[this.answers.indexOf(answer)].downvote == true && this.answers[this.answers.indexOf(answer)].upvote == false) {
-      this.answers[this.answers.indexOf(answer)].downvote = false;
-      this.answers[this.answers.indexOf(answer)].upvote = false;
-      this.answers[this.answers.indexOf(answer)].upvotes = this.answers[this.answers.indexOf(answer)].upvotes + 1
+      if(answer.upvote === null || answer.upvote == true) {
+        answer.upvote = false;
+      } else {
+        answer.upvote = null;
+      }
 
-      this.questionhandler.downvoteanswer(answer.answer_id);
-    } else if(this.answers[this.answers.indexOf(answer)].downvote == false && this.answers[this.answers.indexOf(answer)].upvote == false) {
-      this.answers[this.answers.indexOf(answer)].downvote = true;
-      this.answers[this.answers.indexOf(answer)].upvotes = this.answers[this.answers.indexOf(answer)].upvotes - 1;
-
-      this.questionhandler.upvoteanswer(answer.answer_id);
-    }
+      console.log(answer);
+    })
   }
 }

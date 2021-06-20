@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { constants } from 'src/app/Config/constants';
 import { QueryStringParameters } from 'src/app/Shared/classes/query-string-parameters';
 import { UrlBuilder } from 'src/app/Shared/classes/url-builder';
-import { HttpClient } from '@angular/common/http';
+import { HttpService } from '../HttpService/http.service';
 import { User } from 'src/app/Models/UserModel';
 
 @Injectable({
@@ -11,7 +11,7 @@ import { User } from 'src/app/Models/UserModel';
 export class ApiEndpointsService {
   constructor(
     private constants: constants,
-    private http: HttpClient) {}
+    private http: HttpService) {}
 
   // ----------------------------------------
 
@@ -63,20 +63,28 @@ export class ApiEndpointsService {
 
   // ----------------------------------------
 
-  public retrieveQuestionsById(questionid: Number): string {
-    return this.createUrlWithPathVariables('api/question', [questionid]);
+  public retrieveQuestionsById(questionid: Number) {
+    // return this.createUrlWithPathVariables('api/question', [questionid]);
+    console.log(this.createUrlWithPathVariables('api/question',[questionid]));
+    return this.http.get(
+      this.createUrlWithPathVariables('api/question',[questionid])
+    )
   }
 
   public retrieveQuestionsforHome() {
-    return this.createUrl('api/question/home');
+    // return this.createUrl('api/question/home/');
+    return this.http.get(
+      this.createUrl("api/question/home/")
+    );
   }
 
-  public retrieveQuestionsAnsweredByUsers(userid: Number): string {
-    return this.createUrlWithQueryParameters(
-      'api/question',
+  public retrieveQuestionsAnsweredByUsers(userid: Number) {
+ 
+    return this.http.get(
+      this.createUrlWithQueryParameters('api/question',
       (qs: QueryStringParameters) => {
         qs.push('userid', userid.toString());
-      }
+      })
     );
   }
 
@@ -84,12 +92,14 @@ export class ApiEndpointsService {
     return this.createUrlWithPathVariables('api/answer', [answerid]);
   }
 
-  public retrieveAnswersByQuestionId(questionid: Number): string {
-    return this.createUrlWithQueryParameters(
-      'api/answer',
-      (qs: QueryStringParameters) => {
-        qs.push('questionid', questionid.toString());
-      }
+  public retrieveAnswersByQuestionId(questionid: Number) {
+    return this.http.get(
+      this.createUrlWithQueryParameters(
+        'api/answer/',
+        (qs: QueryStringParameters) => {
+          qs.push('questionid', questionid.toString());
+        }
+      )
     );
   }
 
@@ -97,8 +107,16 @@ export class ApiEndpointsService {
     return this.createUrl('addquestion');
   }
 
-  public upvoteQuestion(answerid: Number): string {
-    return this.createUrlWithPathVariables('upvote', [answerid]);
+  public upvoteAnswer(answerid: Number){
+    return this.http.get(
+      this.createUrlWithPathVariables('api/upvote', [answerid])
+    );
+  }
+
+  public downvoteAnswer(answerid: Number) {
+    return this.http.get(
+      this.createUrlWithPathVariables('api/downvote', [answerid])
+    );
   }
 
   public retrieveProfile(userid: Number) {
@@ -111,13 +129,19 @@ export class ApiEndpointsService {
     return this.createUrl('auth/signup/');
   }
 
-  public login(token: String, email: String){
+  public login(token: string, email: string) {
+
+    let bodyString = JSON.stringify({
+      "email": email,
+      "token": token
+    });
+
+    console.log("bodyString");
+    console.log(bodyString);
+
     return this.http.post(
       this.createUrl('auth/login/'),
-      {
-        "token": token,
-        "email": email
-      }
+      bodyString
     );
   }
 }

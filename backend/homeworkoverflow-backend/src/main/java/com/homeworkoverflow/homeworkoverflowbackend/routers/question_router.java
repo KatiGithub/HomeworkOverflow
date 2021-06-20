@@ -49,9 +49,9 @@ public class question_router {
     }
 
     @RequestMapping(value="/answer/", method = RequestMethod.GET)
-    public ResponseEntity<String> retriveAnswersByQuestionId(@RequestParam Long questionid) {
+    public ResponseEntity<String> retriveAnswersByQuestionId(@RequestParam Long questionid, @RequestHeader("Authorization") String authorizationheader) {
 
-        return this.qController.retrieveAnswersByQuestionId(questionid);
+        return this.qController.retrieveAnswersByQuestionId(questionid, JwtTokenExtractor.ExtractFromHeader(authorizationheader));
     }
 
     @RequestMapping(value="/addquestion/", method = RequestMethod.POST)
@@ -66,9 +66,9 @@ public class question_router {
         return this.qController.upvoteAnswer(answerid, JwtTokenExtractor.ExtractFromHeader(authorizationheader));
     }
     
-    // @RequestMapping(value="/downvote/{id}", method = RequestMethod.GET)
-    // public ResponseEntity downvoteAnswer(@PathVariable("id") Integer questionId, @RequestHeader("Authorization") String authorizationheader) {
+    @RequestMapping(value="/downvote/{id}", method = RequestMethod.GET)
+    public ResponseEntity downvoteAnswer(@PathVariable("id") Long answerid, @RequestHeader("Authorization") String authorizationheader) {
 
-    //     return new ResponseEntity(HttpStatus.OK);
-    // }
+        return this.qController.downvoteAnswer(answerid, JwtTokenExtractor.ExtractFromHeader(authorizationheader));
+    }
 }

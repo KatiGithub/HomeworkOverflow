@@ -1,5 +1,5 @@
 CREATE OR REPLACE FUNCTION downvoteanswer(_userid INT, _answerid INT)
-RETURNS void
+RETURNS INT
 LANGUAGE plpgsql
 
 AS
@@ -7,6 +7,7 @@ $$
 
 DECLARE
     v_upvote tblupvote%rowtype;
+    upvote_count INT;
 
 BEGIN
 
@@ -25,13 +26,17 @@ BEGIN
 
             ELSIF v_upvote.upvote_downvote = TRUE THEN
                 UPDATE tblupvote
-                SET upvote_downvote = true
+                SET upvote_downvote = FALSE
                 WHERE tblupvote.answerid = _answerid AND tblupvote.userid = _userid; 
                 UPDATE tblanswer SET upvotes = upvotes - 2 WHERE answerid = _answerid;
 
         END IF;
     END IF;
 
+    SELECT upvotes
+    INTO upvote_count
+    FROM tblanswer
+    WHERE answerid = _answerid;
     
 END;
 $$;

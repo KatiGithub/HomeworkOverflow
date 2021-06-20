@@ -65,6 +65,10 @@ public class AuthController {
 
         try {
             mapCredential = objectMapper.readValue(signUpBody, HashMap.class);
+            if(!mapCredential.containsKey("username")) {
+                return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+            }
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -72,6 +76,7 @@ public class AuthController {
         try {
             String idToken = mapCredential.get("token");
             User user = firebaseAdmin.getUser(idToken);
+            user.setUsername(mapCredential.get("username"));
 
             authRepository.signUpUser(user);
 

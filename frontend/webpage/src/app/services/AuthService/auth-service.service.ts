@@ -25,6 +25,7 @@ export class AuthService {
       'token': token
     };
 
+    console.log("current user:");
     console.log(userauthdata);
 
     localStorage.setItem('current_user', JSON.stringify(userauthdata));
@@ -154,10 +155,16 @@ export class AuthService {
 
     let credentials = localStorage.getItem('current_user');
     
+    credentials = JSON.parse(credentials);
+    
     return this.apiendpointsservice.login(
-      credentials['token'],
-      credentials['email']
+      credentials["token"],
+      credentials["email"]
     );
 
+  }
+
+  getCurrentUserToken(): string {
+    return localStorage.getItem('current_user')["token"];
   }
 }

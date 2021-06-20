@@ -139,7 +139,6 @@ import { environment } from '../environments/environment';
     HttpClientModule
   ],
   providers: [
-    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

@@ -11,20 +11,22 @@ public class Answer {
     Long answer_id;
     Long questionId;
     String answerContent;
-    Long answeruserid;
+    User answerUser;
+    Boolean userUpvoteStatus;
     Date date_posted;
     Integer upvotes;
     Integer comments;
 
     @Autowired
     public Answer(Long answer_id, Long questionContent, String answerContent,
-            Date date_posted, Integer upvotes, Integer comments, Long answeruserid) {
+            Date date_posted, Integer upvotes, Integer comments, User answerUser, Boolean userUpvoteStatus) {
         this.answer_id = answer_id;
         this.answerContent = answerContent;
         this.date_posted = date_posted;
         this.upvotes = upvotes;
         this.comments = comments;
-        this.answeruserid = answeruserid;
+        this.answerUser = answerUser;
+        this.userUpvoteStatus = userUpvoteStatus;
     }
 
     public Answer() {}
@@ -53,12 +55,12 @@ public class Answer {
         this.answer_id = answer_id;
     }
 
-    public Long getAnsweruserid() {
-        return this.answeruserid;
+    public User getAnswerUser() {
+        return this.answerUser;
     }
 
-    public void setAnsweruserid(Long answeruserid) {
-        this.answeruserid = answeruserid;
+    public void setAnswerUser(User answerUser) {
+        this.answerUser = answerUser;
     }
 
     public Date getDate_posted() {
@@ -83,6 +85,14 @@ public class Answer {
 
     public void setComments(Integer comments) {
         this.comments = comments;
+    }
+
+    public Boolean getUserUpvoteStatus() {
+        return this.userUpvoteStatus;
+    }
+
+    public void setUserUpvoteStatus(Boolean userUpvoteStatus) {
+        this.userUpvoteStatus = userUpvoteStatus;
     }
 
     @Override

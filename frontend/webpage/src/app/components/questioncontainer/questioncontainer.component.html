@@ -13,7 +13,7 @@
 
   <div fxLayout="column">
     <a id="asker_username" [routerLink]="['/profile', 1]" style="color: black;">
-      {{ question.asker_username }}
+      {{ question.asker.username }}
     </a>
 
     {{ question.date_asked.toTimeString() }}

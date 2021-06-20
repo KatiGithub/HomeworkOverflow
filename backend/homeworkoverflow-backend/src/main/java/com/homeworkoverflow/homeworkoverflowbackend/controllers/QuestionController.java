@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,7 +47,7 @@ public class QuestionController {
 
             String idQuestionAsString = this.objectMapper.writeValueAsString(question);
 
-            return new ResponseEntity<String>(idQuestionAsString, this.responseHeaders, HttpStatus.FOUND);
+            return new ResponseEntity<String>(idQuestionAsString, this.responseHeaders, HttpStatus.OK);
         } catch(DataAccessException ex) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -62,7 +63,7 @@ public class QuestionController {
             for (Iterator<Question> iterator = questions.iterator(); iterator.hasNext();) {
                 lsQuestionString.add(iterator.next().toString());
             }
-            return new ResponseEntity<String>(lsQuestionString.toString(), this.responseHeaders, HttpStatus.FOUND);
+            return new ResponseEntity<String>(lsQuestionString.toString(), this.responseHeaders, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -96,18 +97,36 @@ public class QuestionController {
         }
     }
 
-    public ResponseEntity<String> retrieveAnswersByQuestionId(Long questionId) {
+    public ResponseEntity<String> retrieveAnswersByQuestionId(Long questionId, String jwtToken) {
         try {
             List<Answer> lsAnswers = questionRepository.findAnswersByQuestionId(questionId);
             List<String> strlsAnswers = new ArrayList<String>();
             
-            for(Iterator<Answer> iterator = lsAnswers.iterator(); iterator.hasNext();) {
-                strlsAnswers.add(iterator.next().toString());
+            User answerrequester = firebaseAdmin.getUser(jwtToken);
+            answerrequester.setUserid(authRepository.getUserId(answerrequester.getEmail()));
+            
+            if(lsAnswers.size() == 0) {
+                throw new DataAccessException("no results"){};
             }
 
-            return new ResponseEntity<String>(strlsAnswers.toString(), this.responseHeaders, HttpStatus.FOUND);
+            if(lsAnswers.size() > 1) {
+                for(Iterator<Answer> iterator = lsAnswers.iterator(); iterator.hasNext();) {
+                    iterator.next().setUserUpvoteStatus(questionRepository.retrieveUserUpvote(iterator.next().getAnswer_id(), answerrequester.getUserid()));
+                    strlsAnswers.add(iterator.next().toString());
+                }
+            } else {
+                lsAnswers.get(0).setUserUpvoteStatus(questionRepository.retrieveUserUpvote(lsAnswers.get(0).getAnswer_id(), answerrequester.getUserid()));
+                strlsAnswers.add(lsAnswers.get(0).toString());
+            }
+                
+        
+            return new ResponseEntity<String>(strlsAnswers.toString(), this.responseHeaders, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (NullPointerException ex) {
+            return null;
+        } catch(NoSuchElementException ex) {
+            return null;
         }
     }
 
@@ -118,10 +137,10 @@ public class QuestionController {
             System.out.println(question.toString());
 
             User QuestionSubmitter = firebaseAdmin.getUser(jwtToken);
-            Long idQuestionSubmitter = authRepository.getUserId(QuestionSubmitter.getEmail());
+            QuestionSubmitter.setUserid(authRepository.getUserId(QuestionSubmitter.getEmail()));
 
 
-            question.setAskeruserid(idQuestionSubmitter);
+            question.setAsker(QuestionSubmitter);
             questionRepository.submitQuestion(question);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception ex) {
@@ -135,10 +154,23 @@ public class QuestionController {
             User upvoter = firebaseAdmin.getUser(jwtToken);
             Long upvoterid = authRepository.getUserId(upvoter.getEmail());
 
-            questionRepository.upvoteAnswer(answerid, upvoterid);
+            Integer upvotes = questionRepository.upvoteAnswer(answerid, upvoterid);
 
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(upvotes.toString(), this.responseHeaders, HttpStatus.OK);
         } catch (DataAccessException ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public ResponseEntity downvoteAnswer(Long answerid, String jwtToken) {
+        try {
+            User downvoter = firebaseAdmin.getUser(jwtToken);
+            Long downvoterid = authRepository.getUserId(downvoter.getEmail());
+            
+            Integer upvotes = questionRepository.downvoteAnswer(answerid, downvoterid);
+
+            return new ResponseEntity<>(upvotes.toString(), this.responseHeaders, HttpStatus.OK);
+        } catch(DataAccessException ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

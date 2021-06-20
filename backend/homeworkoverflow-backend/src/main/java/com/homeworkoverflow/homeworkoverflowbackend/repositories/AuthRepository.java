@@ -14,12 +14,12 @@ public class AuthRepository {
     JdbcTemplate jdbcTemplate;
 
     public void signUpUser(User user) {
-        String sql_query = String.format("INSERT INTO tbluser (firstname, lastname, email, firebaseuid) VALUES('%s', '%s', '%s', '%s');",
+        String sql_query = String.format("INSERT INTO tbluser (firstname, lastname, email, firebaseuid, username) VALUES('%s', '%s', '%s', '%s', '%s');",
         user.getFirstname(),
         user.getLastname(),
         user.getEmail(),
-        user.getFirebaseuid());
-    
+        user.getFirebaseuid(),
+        user.getUsername());
         try {
             jdbcTemplate.execute(sql_query);
         } catch(DataAccessException ex) {

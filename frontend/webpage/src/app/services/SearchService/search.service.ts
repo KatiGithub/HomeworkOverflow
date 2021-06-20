@@ -34,22 +34,22 @@ export class SearchService {
   }
 
   retrievequestionsearchquery(searchquery) {
-    this.question_searchresults = [];
-    for (let x = 0; x < 10; x++) {
-      this.question_searchresults.push(
-        new Question(
-          x,
-          this.testquestion,
-          this.asker_username_testlist[x],
-          Math.floor(Math.random() * 1000),
-          Math.floor(Math.random() * 60),
-          ['math'],
-          new Date()
-        )
-      );
-    }
+    // this.question_searchresults = [];
+    // for (let x = 0; x < 10; x++) {
+    //   this.question_searchresults.push(
+    //     new Question(
+    //       x,
+    //       this.testquestion,
+    //       this.asker_username_testlist[x],
+    //       Math.floor(Math.random() * 1000),
+    //       Math.floor(Math.random() * 60),
+    //       ['math'],
+    //       new Date()
+    //     )
+    //   );
+    // }
 
-    return this.question_searchresults;
+    return null;
   }
 
   retrieveprofilesearchquery(searchquery) {

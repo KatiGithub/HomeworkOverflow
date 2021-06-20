@@ -2,6 +2,7 @@ export class User {
     userid: Number;
     firstname: String;
     lastname: String;
+    username: String;
     email: String;
     address: String;
     title: String;
@@ -14,6 +15,7 @@ export class User {
     constructor(
         firstname: String,
         lastname: String,
+        username: String,
         userid?: Number,
         email?: String,
         address?: String,
@@ -24,6 +26,7 @@ export class User {
         facebook_username?: String) {
             this.firstname = firstname;
             this.lastname = lastname;
+            this.username = username;
             this.userid = userid;
             this.email = email;
             this.address = address;
@@ -34,4 +37,19 @@ export class User {
             this.facebook_username = facebook_username;
     }
 
+    public static mapJsonToObject(obj: Object) {
+        return new User(
+            obj["firstname"],
+            obj["lastname"],
+            obj["username"],
+            obj["userid"],
+            obj["email"],
+            obj["userlocation"],
+            obj["title"],
+            obj["githubhandle"],
+            obj["twitterhandle"],
+            obj["instagramhandle"],
+            obj["facebookhandle"]
+        );
+    }
 }

@@ -21,7 +21,7 @@ def cleartables():
     cursor.execute("DELETE FROM tblupvote;")
     cursor.execute("DELETE FROM tblanswer;")
     cursor.execute("DELETE FROM tblquestion;")
-    cursor.execute("DELETE FROM tbluser WHERE email != 'kati.pairojtanachai@gmail.com';")
+    cursor.execute("DELETE FROM tbluser WHERE userid != 1001;")
 
 def populatetblUser():
     cursor.execute("ALTER SEQUENCE tbluser_userid_seq RESTART WITH 1;")
@@ -31,8 +31,8 @@ def populatetblUser():
             email = str(random.randint(100, 2000)) + "@test.com"
             firebaseUid = random_firebaseUid()
             insert_query = ""
-            insert_query = """INSERT INTO tbluser (firstname, lastname, email, firebaseuid, title) VALUES('{0}', '{1}', '{2}', '{3}', '{4}');""" 
-            insert_query = insert_query.format(firstnames[index], lastnames[index], str(index) +'@test.com', firebaseUid, 'Frontend Dev')
+            insert_query = """INSERT INTO tbluser (firstname, lastname, email, firebaseuid, title, username) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}');""" 
+            insert_query = insert_query.format(firstnames[index], lastnames[index], str(index) +'@test.com', firebaseUid, 'Frontend Dev', 'username'+str(index))
             cursor.execute(insert_query)
     myConnection.commit()
 
@@ -84,7 +84,7 @@ def populatetblupvote():
     myConnection.commit()
 
     for index in range(1999):
-        insert_query = """INSERT INTO tblupvote(answerid, userid) VALUES({0}, {1});"""
+        insert_query = """INSERT INTO tblupvote(answerid, userid, upvote_downvote) VALUES({0}, {1}, true);"""
         insert_query = insert_query.format(index + 1, 1001)
 
         cursor.execute(insert_query)

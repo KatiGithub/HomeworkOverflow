@@ -17,7 +17,7 @@
               <button mat-button [ngStyle]="{'background-color': answer.upvote ? '#43cffa' : 'white'}"
                 (click)="upvotebuttonpressed(answer)"><img src="assets/chevron-compact-up.svg" height="20px"
                   width="20px"></button>
-              <button mat-button [ngStyle]="{'background-color': answer.downvote ? '#eb3d54' : 'white'}"
+              <button mat-button [ngStyle]="{'background-color': answer.upvote == false ? '#eb3d54' : 'white'}"
                 (click)="downvotebuttonpressed(answer)"><img src="assets/chevron-compact-down.svg" height="20px"
                   width="20px"></button>
               <h3>{{ answer.upvotes }}</h3>
@@ -28,8 +28,8 @@
             <quill-view [content]="answer.answer"></quill-view>
           </mat-grid-tile>
           <mat-grid-tile colspan="1">
-            <a [routerLink]="['/profile', answer.answer_username]">
-              {{ answer.answer_username }}
+            <a [routerLink]="['/profile', answer.answeruser.userid]">
+              {{ answer.answeruser.username }}
             </a>
           </mat-grid-tile>
         </mat-grid-list>

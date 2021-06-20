@@ -9,29 +9,29 @@ public class Question {
     private Long questionId;
     private String questionTitle;
     private String questionContent;
-    private Long askeruserid;
+    private User asker;
     private List<String> tags;
     private Date dateAsked;
     private Integer numberOfComments = 0;
     private Integer upvotes = 0;
 
-    public Question(Long questionId, String questionTitle, String questionContent, Long askeruserid,
+    public Question(Long questionId, String questionTitle, String questionContent, User asker,
             List<String> tags, Date dateAsked, Integer numberOfComments, Integer upvotes) {
         this.questionId = questionId;
         this.questionTitle = questionTitle;
         this.questionContent = questionContent;
-        this.askeruserid = askeruserid;
+        this.asker = asker;
         this.tags = tags;
         this.dateAsked = dateAsked;
         this.numberOfComments = numberOfComments;
         this.upvotes = upvotes;
     }
 
-    public Question(String questionTitle, String questionContent, Long askeruserid,
+    public Question(String questionTitle, String questionContent, User asker,
             List<String> tags, Date dateAsked, Integer numberOfComments, Integer upvotes) {
         this.questionTitle = questionTitle;
         this.questionContent = questionContent;
-        this.askeruserid = askeruserid;
+        this.asker = asker;
         this.tags = tags;
         this.dateAsked = dateAsked;
         this.numberOfComments = numberOfComments;
@@ -40,12 +40,12 @@ public class Question {
 
     public Question() {}
 
-    public Long getAskeruserid() {
-        return this.askeruserid;
+    public User getAsker() {
+        return this.asker;
     }
 
-    public void setAskeruserid(Long askeruserid) {
-        this.askeruserid = askeruserid;
+    public void setAsker(User asker) {
+        this.asker = asker;
     }
 
     public Long getQuestionId() {
