@@ -6,7 +6,6 @@ import com.homeworkoverflow.homeworkoverflowbackend.controllers.QuestionControll
 import com.homeworkoverflow.homeworkoverflowbackend.utils.JwtTokenExtractor;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -70,5 +69,10 @@ public class question_router {
     public ResponseEntity downvoteAnswer(@PathVariable("id") Long answerid, @RequestHeader("Authorization") String authorizationheader) {
 
         return this.qController.downvoteAnswer(answerid, JwtTokenExtractor.ExtractFromHeader(authorizationheader));
+    }
+
+    @RequestMapping(value="/addanswer/", method = RequestMethod.POST)
+    public ResponseEntity submitAnswer(@RequestBody String strAnswer, @RequestHeader("Authorization") String authorizationheader) {
+       return this.qController.submitAnswer(strAnswer, JwtTokenExtractor.ExtractFromHeader(authorizationheader));
     }
 }

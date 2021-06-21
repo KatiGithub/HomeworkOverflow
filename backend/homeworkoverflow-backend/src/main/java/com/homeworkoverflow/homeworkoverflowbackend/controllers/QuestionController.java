@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -109,17 +110,12 @@ public class QuestionController {
                 throw new DataAccessException("no results"){};
             }
 
-            if(lsAnswers.size() > 1) {
-                for(Iterator<Answer> iterator = lsAnswers.iterator(); iterator.hasNext();) {
-                    iterator.next().setUserUpvoteStatus(questionRepository.retrieveUserUpvote(iterator.next().getAnswer_id(), answerrequester.getUserid()));
-                    strlsAnswers.add(iterator.next().toString());
-                }
-            } else {
-                lsAnswers.get(0).setUserUpvoteStatus(questionRepository.retrieveUserUpvote(lsAnswers.get(0).getAnswer_id(), answerrequester.getUserid()));
-                strlsAnswers.add(lsAnswers.get(0).toString());
-            }
-                
-        
+            for (int index = 0; index < lsAnswers.size(); index++) {
+                lsAnswers.get(index).setUserUpvoteStatus(questionRepository.retrieveUserUpvote(lsAnswers.get(index).getAnswer_id(), answerrequester.getUserid()));
+                strlsAnswers.add(lsAnswers.get(index).toString());
+            }    
+            
+            System.out.println(strlsAnswers);
             return new ResponseEntity<String>(strlsAnswers.toString(), this.responseHeaders, HttpStatus.OK);
         } catch (DataAccessException ex) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -173,5 +169,28 @@ public class QuestionController {
         } catch(DataAccessException ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    public ResponseEntity submitAnswer(String strAnswer, String jwtToken) {
+        HashMap<String, Object> mapAnswer = new HashMap<>();
+
+        try {
+            mapAnswer = objectMapper.readValue(strAnswer, HashMap.class);
+        } catch(Exception ex) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        try {
+            User user = firebaseAdmin.getUser(jwtToken);
+            user.setUserid(authRepository.getUserId(user.getEmail()));
+
+            Answer answer = Answer.mapJsonToAnswer(mapAnswer, user);
+            questionRepository.submitAnswer(answer);
+
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch(DataAccessException ex) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        
     }
 }

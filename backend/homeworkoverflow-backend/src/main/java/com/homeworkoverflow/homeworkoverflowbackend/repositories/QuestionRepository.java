@@ -219,27 +219,27 @@ public class QuestionRepository {
                 jdbcTemplate.execute(final_query.toString());
             }
                     
-                Integer upvotes = retrieveUpvotestoAnswer(answerid);
-                return upvotes;
-            } catch (EmptyResultDataAccessException ex) {
-                return null;
-            } catch(DataAccessException ex) {
-                ex.printStackTrace();
-                throw ex;
-            } catch(NullPointerException ex) {
-                return null;
-            }
+            Integer upvotes = retrieveUpvotestoAnswer(answerid);
+            return upvotes;
+        } catch (EmptyResultDataAccessException ex) {
+            return null;
+        } catch(DataAccessException ex) {
+            ex.printStackTrace();
+            throw ex;
+        } catch(NullPointerException ex) {
+            return null;
         }
-        private Integer retrieveUpvotestoAnswer(Long answerid) {
-            try {
-                String sql_query = String.format("SELECT upvotes FROM tblanswer WHERE answerid = %s;", answerid);
+    }
+    private Integer retrieveUpvotestoAnswer(Long answerid) {
+        try {
+            String sql_query = String.format("SELECT upvotes FROM tblanswer WHERE answerid = %s;", answerid);
 
-                Integer upvotes = jdbcTemplate.queryForObject(sql_query, Integer.class);
+            Integer upvotes = jdbcTemplate.queryForObject(sql_query, Integer.class);
 
-                return upvotes;
-            } catch (DataAccessException ex) {
-                throw ex;
-            }
+            return upvotes;
+        } catch (DataAccessException ex) {
+            throw ex;
+        }
     }
 
     public Boolean retrieveUserUpvote(Long answerid, Long userid) {
@@ -254,6 +254,22 @@ public class QuestionRepository {
             return currentuser_vote_status;
         } catch(EmptyResultDataAccessException ex) {
             return null;
+        }
+    }
+
+    public void submitAnswer(Answer answer) {
+        try {
+            String sql_query = String.format("INSERT INTO tblanswer(questionid, answeruserid, answercontent, dateposted, upvotes) VALUES(%s, %s, '%s', %s, %s)",
+                answer.getQuestionId(),
+                answer.getAnswerUser().getUserid(),
+                answer.getAnswerContent(),
+                answer.getDate_posted(),
+                answer.getUpvotes()
+            );
+
+            jdbcTemplate.execute(sql_query);
+        } catch(DataAccessException ex) {
+            throw ex;
         }
     }
 }                    

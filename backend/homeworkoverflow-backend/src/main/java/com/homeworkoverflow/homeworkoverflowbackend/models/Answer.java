@@ -1,6 +1,7 @@
 package com.homeworkoverflow.homeworkoverflowbackend.models;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,7 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class Answer {
-    Long answer_id;
+    Long answerid;
     Long questionId;
     String answerContent;
     User answerUser;
@@ -18,9 +19,9 @@ public class Answer {
     Integer comments;
 
     @Autowired
-    public Answer(Long answer_id, Long questionContent, String answerContent,
+    public Answer(Long answerid, Long questionContent, String answerContent,
             Date date_posted, Integer upvotes, Integer comments, User answerUser, Boolean userUpvoteStatus) {
-        this.answer_id = answer_id;
+        this.answerid = answerid;
         this.answerContent = answerContent;
         this.date_posted = date_posted;
         this.upvotes = upvotes;
@@ -48,11 +49,11 @@ public class Answer {
     }
 
     public Long getAnswer_id() {
-        return this.answer_id;
+        return this.answerid;
     }
 
-    public void setAnswer_id(Long answer_id) {
-        this.answer_id = answer_id;
+    public void setAnswer_id(Long answerid) {
+        this.answerid = answerid;
     }
 
     public User getAnswerUser() {
@@ -104,6 +105,16 @@ public class Answer {
 
             return "";
         }
+    }
+
+    public static Answer mapJsonToAnswer(HashMap<String, Object> obj, User user) {
+        Answer answer = new Answer();
+
+        answer.setAnswerContent((String) obj.get("answerContent"));
+        answer.setAnswerUser(user);
+        answer.setQuestionId((Long) obj.get("questionid"));
+
+        return answer;
     }
 
 }
