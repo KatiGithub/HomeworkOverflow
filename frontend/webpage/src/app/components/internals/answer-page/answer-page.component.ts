@@ -33,7 +33,6 @@ export class AnswerPageComponent implements OnInit {
     this.questionhandler.RetrieveQuestionbyID(this.question_id).subscribe((data) => {
       console.log(data);
       this.question = Question.mapObjectToQuestion(data);
-      console.log(this.question);
     });
 
     this.questionhandler.RetrieveAnswersofQuestion(this.question_id).subscribe((data: Array<any>) => {
@@ -63,32 +62,36 @@ export class AnswerPageComponent implements OnInit {
     //     Math.floor(Math.random() * 60)
     //   )
     // );
+
+    
+
     this.answer.disable();
     this.answer.reset();
   }
 
   upvotebuttonpressed(answer: Answer): void {
-    console.log(answer.answer_id);
+    console.log(answer);
+    console.log(answer.answerid);
 
-    this.questionhandler.upvoteanswer(answer.answer_id).subscribe((data: Number) => {
+    this.questionhandler.upvoteanswer(answer.answerid).subscribe((data: Number) => {
       answer.upvotes = data;
-      if(answer.upvote) {
-        answer.upvote = null;
-      } else if(!answer.upvote) {
-        answer.upvote = true;
+      if(answer.upvoteUserStatus) {
+        answer.upvoteUserStatus = null;
+      } else if(!answer.upvoteUserStatus) {
+        answer.upvoteUserStatus = true;
       }
       console.log(answer);
     });
   }
 
   downvotebuttonpressed(answer: Answer): void {
-    this.questionhandler.downvoteanswer(answer.answer_id).subscribe((data: Number) => {
+    this.questionhandler.downvoteanswer(answer.answerid).subscribe((data: Number) => {
       answer.upvotes = data;
 
-      if(answer.upvote === null || answer.upvote == true) {
-        answer.upvote = false;
+      if(answer.upvoteUserStatus === null || answer.upvoteUserStatus == true) {
+        answer.upvoteUserStatus = false;
       } else {
-        answer.upvote = null;
+        answer.upvoteUserStatus = null;
       }
 
       console.log(answer);

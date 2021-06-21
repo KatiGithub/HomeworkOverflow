@@ -4,6 +4,7 @@ import { QueryStringParameters } from 'src/app/Shared/classes/query-string-param
 import { UrlBuilder } from 'src/app/Shared/classes/url-builder';
 import { HttpService } from '../HttpService/http.service';
 import { User } from 'src/app/Models/UserModel';
+import { Answer } from 'src/app/Models/AnswerModel';
 
 @Injectable({
   providedIn: 'root',
@@ -103,8 +104,12 @@ export class ApiEndpointsService {
     );
   }
 
-  public submitQuestion(): string {
+  public submitQuestion() {
     return this.createUrl('addquestion');
+  }
+
+  public submitAnswer(answer: Answer) {
+    
   }
 
   public upvoteAnswer(answerid: Number){

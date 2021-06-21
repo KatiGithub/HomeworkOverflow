@@ -13,7 +13,6 @@ export class AuthService {
   constructor(
     private router: Router,
     public afAuth: AngularFireAuth,
-    private http: HttpService,
     private apiendpointsservice: ApiEndpointsService) {}
 
   login(email: String, token: String) {
@@ -165,6 +164,7 @@ export class AuthService {
   }
 
   getCurrentUserToken(): string {
+
     return localStorage.getItem('current_user')["token"];
   }
 }

@@ -1,27 +1,30 @@
 import { User } from "./UserModel";
 
 export class Answer {
-    upvote: Boolean = null;
-    answer_id: Number;
+    upvoteUserStatus: Boolean = null;
+    answerid: Number;
     answeruser: User
-    answer: String;
-    date_posted: Date;
+    questionid: Number;
+    answerContent: String;
+    dateAnswered: Date;
     upvotes: Number;
     comments: Number;
 
     constructor(
-                answer_id: number,
-                upvote: Boolean,
+                answerid: number,
+                upvoteUserStatus: Boolean,
                 answeruser: User,
-                answer: String,
-                date_posted: Date,
+                questionid: Number,
+                answerContent: String,
+                dateAnswered: Date,
                 upvotes: Number,
                 comments: Number) {
-                    this.answer_id = answer_id;
-                    this.upvote = upvote;
+                    this.answerid = answerid;
+                    this.upvoteUserStatus = upvoteUserStatus;
                     this.answeruser = answeruser;
-                    this.answer = answer;
-                    this.date_posted = date_posted;
+                    this.questionid = questionid;
+                    this.answerContent = answerContent;
+                    this.dateAnswered = dateAnswered;
                     this.upvotes = upvotes;
                     this.comments = comments;
     }
@@ -31,8 +34,9 @@ export class Answer {
             obj["answer_id"],
             obj["userUpvoteStatus"],
             User.mapJsonToObject(obj["answerUser"]),
+            obj["questionId"],
             obj["answerContent"],
-            obj["date_posted"],
+            obj["dateAnswered"],
             obj["upvotes"],
             obj["comments"]
         );
