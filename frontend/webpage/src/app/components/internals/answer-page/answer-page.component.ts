@@ -50,18 +50,6 @@ export class AnswerPageComponent implements OnInit {
 
   submitanswer(): void {
     console.log(this.answer.value);
-    // this.answers.push(
-    //   new Answer(
-    //     Math.floor(Math.random() * 1000),
-    //     false,
-    //     false,
-    //     'Mark',
-    //     this.answer.value,
-    //     new Date(),
-    //     Math.floor(Math.random() * 1000),
-    //     Math.floor(Math.random() * 60)
-    //   )
-    // );
 
     
 
@@ -71,27 +59,27 @@ export class AnswerPageComponent implements OnInit {
 
   upvotebuttonpressed(answer: Answer): void {
     console.log(answer);
-    console.log(answer.answerid);
+    console.log(answer.getAnswerid());
 
-    this.questionhandler.upvoteanswer(answer.answerid).subscribe((data: Number) => {
-      answer.upvotes = data;
-      if(answer.upvoteUserStatus) {
-        answer.upvoteUserStatus = null;
-      } else if(!answer.upvoteUserStatus) {
-        answer.upvoteUserStatus = true;
+    this.questionhandler.upvoteanswer(answer.getAnswerid()).subscribe((data: Number) => {
+      answer.setUpvotes(data);
+      if(answer.getUpvoteUserStatus()) {
+        answer.setUpvoteUserStatus(null);
+      } else if(!answer.getUpvoteUserStatus()) {
+        answer.setUpvoteUserStatus(true);
       }
       console.log(answer);
     });
   }
 
   downvotebuttonpressed(answer: Answer): void {
-    this.questionhandler.downvoteanswer(answer.answerid).subscribe((data: Number) => {
-      answer.upvotes = data;
+    this.questionhandler.downvoteanswer(answer.getAnswerid()).subscribe((data: Number) => {
+      answer.setUpvotes(data);
 
-      if(answer.upvoteUserStatus === null || answer.upvoteUserStatus == true) {
-        answer.upvoteUserStatus = false;
+      if(answer.getUpvoteUserStatus === null || answer.getUpvoteUserStatus() == true) {
+        answer.setUpvoteUserStatus(false)
       } else {
-        answer.upvoteUserStatus = null;
+        answer.setUpvoteUserStatus(null);
       }
 
       console.log(answer);

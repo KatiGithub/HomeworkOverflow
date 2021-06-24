@@ -4,6 +4,7 @@ import { HttpService } from '../HttpService/http.service';
 import { ApiEndpointsService } from '../ApiEndpointsService/api-endpoints.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Injectable({
@@ -156,6 +157,10 @@ export class AuthService {
     
     credentials = JSON.parse(credentials);
     
+    if(credentials == null) {
+      this.logout();
+    } 
+
     return this.apiendpointsservice.login(
       credentials["token"],
       credentials["email"]
@@ -166,5 +171,21 @@ export class AuthService {
   getCurrentUserToken(): string {
 
     return localStorage.getItem('current_user')["token"];
+  }
+
+  signUpUser(username: String) {
+
+    let credentials = JSON.parse(localStorage.getItem('current_user'));
+
+    this.apiendpointsservice.signup({
+      'username': username,
+      'email': credentials['email'],
+      'token': credentials['token']
+    }).subscribe((data) => {
+      this.router.navigate[''];
+    }, (err: HttpErrorResponse) => {
+      console.log(err);
+      return err;
+    });
   }
 }

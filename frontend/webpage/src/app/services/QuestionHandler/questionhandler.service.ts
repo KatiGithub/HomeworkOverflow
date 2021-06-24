@@ -67,4 +67,8 @@ export class QuestionhandlerService {
     console.log('Downvoted answer id: ' + answer_id);
     return this.apiendpointsservice.downvoteAnswer(answer_id);
   }
+
+  submitanswer(answer: string) {
+    
+  }
 }

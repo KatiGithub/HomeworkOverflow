@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="space-between space-between">
-    <a [routerLink]="['/profile/', this.profile.userid]" style="color: black">
-      {{ this.profile.userid }}
+    <a [routerLink]="['/profile/', this.profile.getUserid()]" style="color: black">
+      {{ this.profile.getUserid() }}
     </a>
   
     <!-- <a id="asker_username" [routerLink]="['/profile', question.asker_username]" style="color: black;">

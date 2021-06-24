@@ -21,7 +21,7 @@ def cleartables():
     cursor.execute("DELETE FROM tblupvote;")
     cursor.execute("DELETE FROM tblanswer;")
     cursor.execute("DELETE FROM tblquestion;")
-    cursor.execute("DELETE FROM tbluser WHERE userid != 1001;")
+    cursor.execute("DELETE FROM tbluser;")
 
 def populatetblUser():
     cursor.execute("ALTER SEQUENCE tbluser_userid_seq RESTART WITH 1;")
@@ -96,7 +96,7 @@ def populateDb():
     populatetblUser()
     populatetblQuestion()
     populatetblanswer()
-    populatetblupvote()
+    # populatetblupvote()
 
     
 def random_firebaseUid():

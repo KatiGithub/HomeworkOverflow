@@ -51,6 +51,10 @@ public class AuthController {
             User user = firebaseAdmin.getUser(idtoken);
 
             if(user.getEmail().equals(email)) {
+                if(authRepository.getUserId(user.getEmail()) == null) {
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {
                 throw new Exception();
@@ -65,7 +69,7 @@ public class AuthController {
 
         try {
             mapCredential = objectMapper.readValue(signUpBody, HashMap.class);
-            if(!mapCredential.containsKey("username")) {
+            if(!mapCredential.containsKey("username") || !mapCredential.containsKey("email") || !mapCredential.containsKey("token")) {
                 return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
             }
 

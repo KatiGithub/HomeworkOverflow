@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { AuthService } from '../AuthService/auth-service.service';
@@ -15,8 +16,13 @@ export class AuthGuardService implements CanActivate {
       .then((data) => {
         return true;
       })
-      .catch((err) => {
+      .catch((err: HttpErrorResponse) => {
         console.log(err);
+
+        if(err.status == 404) {
+          this.router.navigate(['signup']);
+          return false;
+        }
         this.auth.logout();
         return false;
       });

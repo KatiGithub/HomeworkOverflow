@@ -12,8 +12,8 @@
   </div>
 
   <div fxLayout="column">
-    <a id="asker_username" [routerLink]="['/profile', question.asker.userid]" style="color: black;">
-      {{ question.asker.username }}
+    <a id="asker_username" [routerLink]="['/profile', question.asker.getUserid()]" style="color: black;">
+      {{ question.asker.getUsername() }}
     </a>
 
     {{ question.date_asked.toTimeString() }}

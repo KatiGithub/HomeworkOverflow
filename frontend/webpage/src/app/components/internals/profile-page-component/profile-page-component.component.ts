@@ -25,17 +25,21 @@ export class ProfilePageComponentComponent implements OnInit {
     });
 
     this.ProfileService.retrieveprofile(this.asker_id).then((data) => {
-      this.userondisplay = new User(
-        data["firstname"],
-        data["lastname"],
-        data["userid"],
-        data["email"],
-        data["userlocation"],
-        data["title"],
-        data["githubhandle"],
-        data["twitterhandle"],
-        data["facebookhandle"]
-      );
+      console.log(data);
+      // this.userondisplay = new User(
+      //   data["firstname"],
+      //   data["lastname"],
+      //   data["username"],
+      //   data["userid"],
+      //   data["email"],
+      //   data["userlocation"],
+      //   data["title"],
+      //   data["githubhandle"],
+      //   data["twitterhandle"],
+      //   data["facebookhandle"]
+      // );
+
+      this.userondisplay = User.mapJsonToObject(data);
 
       Object.keys(this.userondisplay).forEach((item) => {
         if(this.userondisplay[item] == null) {

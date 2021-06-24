@@ -14,22 +14,22 @@
         <mat-grid-list cols="5">
           <mat-grid-tile colspan="1">
             <div class="upvote-downvote" fxLayout="column" fxLayoutGap="5px">
-              <button mat-button [ngStyle]="{'background-color': answer.upvoteUserStatus ? '#43cffa' : 'white'}"
+              <button mat-button [ngStyle]="{'background-color': answer.getUpvoteUserStatus ? '#43cffa' : 'white'}"
                 (click)="upvotebuttonpressed(answer)"><img src="assets/chevron-compact-up.svg" height="20px"
                   width="20px"></button>
-                  <h3> {{ answer.upvotes }}</h3>
-              <button mat-button [ngStyle]="{'background-color': answer.upvoteUserStatus == false ? '#eb3d54' : 'white'}"
+                  <h3> {{ answer.getUpvotes() }}</h3>
+              <button mat-button [ngStyle]="{'background-color': answer.getUpvoteUserStatus() == false ? '#eb3d54' : 'white'}"
                 (click)="downvotebuttonpressed(answer)"><img src="assets/chevron-compact-down.svg" height="20px"
                   width="20px"></button>
               
             </div>
           </mat-grid-tile>
           <mat-grid-tile colspan="3">
-            <quill-view [content]="answer.answerContent"></quill-view>
+            <quill-view [content]="answer.getAnswerContent()"></quill-view>
           </mat-grid-tile>
           <mat-grid-tile colspan="1">
-            <a [routerLink]="['/profile', answer.answeruser.userid]">
-              {{ answer.answeruser.username }}
+            <a [routerLink]="['/profile', answer.getAnswerUser().getUserid()]">
+              {{ answer.getAnswerUser().getUsername() }}
             </a>
           </mat-grid-tile>
         </mat-grid-list>

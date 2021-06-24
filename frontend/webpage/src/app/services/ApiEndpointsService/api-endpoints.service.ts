@@ -130,8 +130,13 @@ export class ApiEndpointsService {
       this.createUrlWithPathVariables('profile/user', [userid]));
   }
 
-  public signup(): string {
-    return this.createUrl('auth/signup/');
+  public signup(loginCredential: Object) {
+    // return this.createUrl('auth/signup/');
+
+    return this.http.post(
+      this.createUrl('auth/signup/'),
+      loginCredential
+    )
   }
 
   public login(token: string, email: string) {
