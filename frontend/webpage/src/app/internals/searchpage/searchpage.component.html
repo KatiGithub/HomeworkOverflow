@@ -1,0 +1,26 @@
+<mat-grid-list cols="5" rowHeight="100%">
+  <mat-grid-tile colspan="4" [ngStyle]="{ 'background-color': 'skyblue' }" fxLayout="column">
+    <div class="question-list">
+      <div class="search-information">
+        <h1> Search for: "{{ this.searchquery }}"</h1>
+        <mat-button-toggle-group name="profile-question" class="profile-question-selector" [formControl]="showpage">
+          <mat-button-toggle value="question">Question</mat-button-toggle>
+          <mat-button-toggle value="profile">Profile</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+      <div *ngIf="showpage.value == 'question'">
+        <div *ngFor="let question of this.questions" class="question">
+          <app-questioncontainer
+            [QuestionItem]="question"
+          ></app-questioncontainer>
+        </div>
+      </div>
+      <div *ngIf="showpage.value == 'profile'">
+        <div *ngFor="let profile of this.profiles">
+          <app-profilecontainer [ProfileItem]="profile"></app-profilecontainer>
+        </div>
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile [ngStyle]="{ 'background-color': 'red' }">2</mat-grid-tile>
+</mat-grid-list>

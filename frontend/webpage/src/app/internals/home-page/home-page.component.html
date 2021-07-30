@@ -1,0 +1,25 @@
+<mat-grid-list cols="5" rowHeight="100%">
+  <mat-grid-tile colspan="4" [ngStyle]="{ 'background-color': 'skyblue' }">
+    <div class="question-list">
+      <div *ngFor="let question of this.questions" class="question">
+        <!-- <div class="question">
+                    <h1>{{ question['asker_username'] }}</h1>
+                    {{ question['question'] }}
+                    <p style="text-align: right;">Votes: {{ question['upvotes'] }}</p>
+                </div> -->
+        <app-questioncontainer
+          [QuestionItem]="question"
+        ></app-questioncontainer>
+      </div>
+    </div>
+    <!-- <div class="question-list">
+            
+        </div>
+            <mat-list style="height: 100%;">
+                <mat-list-item *ngFor="let question of this.questions" class="question">
+                    <app-questioncontainer [QuestionItem]="question"></app-questioncontainer>
+                </mat-list-item>
+            </mat-list> -->
+  </mat-grid-tile>
+  <mat-grid-tile [ngStyle]="{ 'background-color': 'red' }">2</mat-grid-tile>
+</mat-grid-list>
